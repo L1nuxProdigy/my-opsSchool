@@ -70,9 +70,22 @@ client.create_internet_gateway()
 print("The amount of existing IG's: ",len(client.describe_internet_gateways()['InternetGateways']))
 pick_IG = int(input("Enter an Int to pick a IG (starting from 0): "))
 internet_gateway_id = client.describe_internet_gateways()['InternetGateways'][pick_IG]['InternetGatewayId']
-
-# attach the IG to the VPC
+## attach the IG to the VPC
 vpc.attach_internet_gateway(InternetGatewayId=internet_gateway_id)
+
+# DHCP options (not sure what to do yet
+dhcp_options_id = client.describe_dhcp_options()['DhcpOptions'][0]['DhcpOptionsId']
+client.delete_dhcp_options(dhcp_options_id)
+ec2.create_dhcp_options(DhcpConfigurations=[{'Key': 'domain-name-servers','Values': ['8.8.8.8','8.8.4.4']}])
+## attach the DHCP Options to the VPC
+dhcp_options_id = client.describe_dhcp_options()['DhcpOptions'][0]['DhcpOptionsId']
+vpc.associate_dhcp_options(DhcpOptionsId=dhcp_options_id)
+
+
+
+
+
+
 
 
 
@@ -125,6 +138,35 @@ vpc.attach_internet_gateway(InternetGatewayId=internet_gateway_id)
             'content-type': 'text/xml;charset=UTF-8',
             'content-length': '472',
             'date': 'Fri, 14 Dec 2018 15:15:07 GMT',
+            'server': 'AmazonEC2'
+        },
+        'RetryAttempts': 0
+    }
+}
+
+{
+    'DhcpOptions': [{
+        'DhcpConfigurations': [{
+            'Key': 'domain-name',
+            'Values': [{
+                'Value': 'eu-west-3.compute.internal'
+            }]
+        }, {
+            'Key': 'domain-name-servers',
+            'Values': [{
+                'Value': 'AmazonProvidedDNS'
+            }]
+        }],
+        'DhcpOptionsId': 'dopt-07c1acc6fa8d6e256',
+        'OwnerId': '920354577513'
+    }],
+    'ResponseMetadata': {
+        'RequestId': 'bdcd4a51-c9fd-42a1-9eda-fc772b20b7c1',
+        'HTTPStatusCode': 200,
+        'HTTPHeaders': {
+            'content-type': 'text/xml;charset=UTF-8',
+            'content-length': '1038',
+            'date': 'Fri, 14 Dec 2018 20:54:06 GMT',
             'server': 'AmazonEC2'
         },
         'RetryAttempts': 0
