@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# MySQL Percona
+echo 'percona_script_path = "/home/ubuntu/my-opsSchool/percona/terraform/scripts/percona_install"' >> /home/ubuntu/my-opsSchool/percona/terraform/variables
+
+

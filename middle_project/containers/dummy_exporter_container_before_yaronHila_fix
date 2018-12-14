@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# installing Docker CE Prerequisites
+sudo apt-get update -y
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+# to validate the fingerprint use the following command
+# sudo apt-key fingerprint 0EBFCD88
+
+# Installing Docker CE
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get install docker-ce -y
+
+# installing Docker Compose, and making the downloaded binary executable
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chown ubuntu /usr/local/bin/docker-compose
+sudo chmod 774 /usr/local/bin/docker-compose
+
+# adding the running user ubuntu to the docker group
+sudo usermod -aG docker ubuntu
+
+# run app
+sudo docker run -d -p 65433:65433 d0ckerprodigy/public:app_dummy
+
+
+### Consul Stuff ###
+# Downloading and installing Prerequisites
+sudo apt install unzip -y
+sudo wget https://releases.hashicorp.com/consul/1.4.0/consul_1.4.0_linux_amd64.zip
+
+# Unzipping and moving the binary to path
+sudo unzip consul_1.4.0_linux_amd64.zip
+sudo mv ./consul /usr/local/bin/consul
+sudo chown ubuntu /usr/local/bin/consul
+
+
+## consul client command
+sudo mkdir /var/lib/consul /etc/consul.d
+LOCAL_IPV4=$(curl "http://169.254.169.254/latest/meta-data/local-ipv4")
+
+cat << EOCCF >/etc/consul.d/agent.hcl
+client_addr =  "0.0.0.0"
+recursors =  ["127.0.0.1"]
+bootstrap =  false
+datacenter = "dc1"
+data_dir = "/var/lib/consul"
+enable_syslog = true
+log_level = "DEBUG"
+retry_join = ["provider=aws tag_key=Name tag_value=Consul_Prometheus_by_Terraform"]
+advertise_addr = "${LOCAL_IPV4}"
+EOCCF
+
+cat << EOCSU >/etc/systemd/system/consul.service
+[Unit]
+Description=consul agent
+Requires=network-online.target
+After=network-online.target
+[Service]
+LimitNOFILE=65536
+Restart=on-failure
+ExecStart=/usr/local/bin/consul agent -config-dir /etc/consul.d
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+Type=notify
+[Install]
+WantedBy=multi-user.target
+EOCSU
+
+systemctl daemon-reload
+systemctl start consul &
+
+
+sudo echo '{"service": {"name": "dummy_exporter", "tags": ["dummy"], "port": 65433}}' > /etc/consul.d/dummy_exporter.json

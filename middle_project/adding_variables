@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# dummy exporter
+echo 'user_data_dummy_exporter_path1 = "/home/ubuntu/my-opsSchool/middle_project/containers/dummy_exporter_container1"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+echo 'user_data_dummy_exporter_path2 = "/home/ubuntu/my-opsSchool/middle_project/containers/dummy_exporter_container2"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+
+# consul
+echo 'consul_client_path = "/home/ubuntu/my-opsSchool/middle_project/consul/consul_install_client"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+echo 'consul_server_path = "/home/ubuntu/my-opsSchool/middle_project/consul/consul_install_server"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+echo 'prometheus_consul_server_path = "/home/ubuntu/my-opsSchool/middle_project/consul/prometheus_consul_install_server"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+echo 'grafana_path = "/home/ubuntu/my-opsSchool/middle_project/grafana/grafana_install"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+
+# ELK
+echo 'logstash_path = "/home/ubuntu/my-opsSchool/middle_project/ELK/logstash_install"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+echo 'elasticsearch_path = "/home/ubuntu/my-opsSchool/middle_project/ELK/elasticsearch_install"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+echo 'kibana_path = "/home/ubuntu/my-opsSchool/middle_project/ELK/kibana_install"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+
+
+

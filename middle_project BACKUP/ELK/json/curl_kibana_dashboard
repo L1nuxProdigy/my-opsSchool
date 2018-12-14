@@ -1,0 +1,29 @@
+## without file
+curl -X POST 'http://'${LOCAL_IPV4}':5601/api/kibana/dashboards/import' -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
+{
+  "objects": [
+  {
+    "_id": "929f1b70-16a0-11e9-93bd-9b501f714d49",
+    "type": "dashboard",
+      "updated_at": "2018-09-07T18:41:05.887Z",
+      "version": 1,
+      "attributes": {
+      "title": "Logs Count",
+      "hits": 0,
+      "description": "the amount of logs per app machine",
+      "panelsJSON": "[\n  {\n    \"embeddableConfig\": {},\n    \"gridData\": {\n      \"h\": 15,\n      \"i\": \"1\",\n      \"w\": 28,\n      \"x\": 0,\n      \"y\": 0\n    },\n    \"id\": \"e46ed270-169f-11e9-93bd-9b501f714d49\",\n    \"panelIndex\": \"1\",\n    \"type\": \"visualization\",\n    \"version\": \"6.5.4\"\n  }\n]",
+      "optionsJSON": "{\n  \"darkTheme\": false,\n  \"hidePanelTitles\": false,\n  \"useMargins\": true\n}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"query\": {\n    \"language\": \"lucene\",\n    \"query\": \"\"\n  },\n  \"filter\": []\n}"
+      }
+    }
+  }
+  ]
+}
+'
+
+## with file
+curl -X POST 'http://'${LOCAL_IPV4}':5601/api/kibana/dashboards/import' -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d @/home/ubuntu/my-opsSchool/middle_project/ELK/json/kibana_dashboard_json_new
+

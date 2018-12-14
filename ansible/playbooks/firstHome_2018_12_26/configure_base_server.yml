@@ -1,0 +1,23 @@
+---
+- name: create user, add repo, install and configure ntp
+  hosts: nodes
+  remote_user: ec2-user
+  become: yes
+  vars_files: ['credentials.yml','variables.yml']
+  
+  tasks:
+  - name: create opsschool user
+    user: name=opsschool password={{ user_default_password }}
+    
+  - name: install epel repo
+    yum: name={{ epel_yum_repo }} state=present
+    
+  - name: install ntp
+    yum: name=ntp state=present
+    
+  - name: replace ntp.conf
+    template: src=/home/ec2-user/my-opsSchool/ansible/playbooks/firstHome_2018_12_26/ntp_template dest=/etc/ntp.conf
+    
+  - name: restart ntp service
+    service: name=ntpd state=restarted
+  

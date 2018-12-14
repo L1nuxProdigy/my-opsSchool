@@ -1,0 +1,45 @@
+#!/bin/bash
+## haproxy -v 1.5.18
+## install ha_proxy ##
+sudo yum install haproxy -y
+
+## install some tools ##
+sudo yum install curl -y
+sudo yum install git -y
+
+## whats my inner ip ##
+local_ipv4=$(curl "http://169.254.169.254/latest/meta-data/local-ipv4")
+
+## the text to add to enable ha proxy stats ##
+echo "listen  stats   $local_ipv4:1936
+    mode            http
+    log             global
+
+    maxconn 10
+
+    clitimeout      100s
+    srvtimeout      100s
+    contimeout      100s
+    timeout queue   100s
+
+    stats enable
+    stats hide-version
+    stats refresh 30s
+    stats show-node
+    stats auth admin:password
+    stats uri  /stats" > /home/ec2-user/file
+
+## manipulate the text into the ha proxy configuration file
+## sudo mv /home/ec2-user/orig /etc/haproxy/haproxy.cfg
+sudo cat /etc/haproxy/haproxy.cfg >/home/ec2-user/orig
+sudo cat /etc/haproxy/haproxy.cfg | sed -e '1,59!d' > /home/ec2-user/first
+sudo cat /etc/haproxy/haproxy.cfg | sed -e '60,88!d' > /home/ec2-user/second
+sudo cat /home/ec2-user/file >> /home/ec2-user/first
+sudo cat /home/ec2-user/second >> /home/ec2-user/first
+#sudo mv /home/ec2-user/first /etc/haproxy/haproxy.cfg
+
+sudo service haproxy start
+sudo service haproxy status
+
+## cloning git repo
+git clone https://github.com/L1nuxProdigy/my-opsSchool

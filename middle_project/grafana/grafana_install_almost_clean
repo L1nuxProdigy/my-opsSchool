@@ -1,0 +1,70 @@
+#!/bin/bash
+
+### Consul Stuff ###
+# Downloading and installing Prerequisites
+sudo apt install unzip -y
+sudo wget https://releases.hashicorp.com/consul/1.4.0/consul_1.4.0_linux_amd64.zip
+
+# Unzipping and moving the binary to path
+sudo unzip consul_1.4.0_linux_amd64.zip
+sudo mv ./consul /usr/local/bin/consul
+sudo chown ubuntu /usr/local/bin/consul
+
+
+## consul client command
+sudo mkdir /var/lib/consul /etc/consul.d
+LOCAL_IPV4=$(curl "http://169.254.169.254/latest/meta-data/local-ipv4")
+
+cat << EOCCF >/etc/consul.d/agent.hcl
+node_name = "grafana"
+client_addr =  "0.0.0.0"
+recursors =  ["127.0.0.1"]
+bootstrap =  false
+datacenter = "dc1"
+data_dir = "/var/lib/consul"
+enable_syslog = true
+log_level = "DEBUG"
+retry_join = ["provider=aws tag_key=Name tag_value=Consul_Prometheus_by_Terraform"]
+advertise_addr = "${LOCAL_IPV4}"
+EOCCF
+
+cat << EOCSU >/etc/systemd/system/consul.service
+[Unit]
+Description=consul agent
+Requires=network-online.target
+After=network-online.target
+[Service]
+LimitNOFILE=65536
+Restart=on-failure
+ExecStart=/usr/local/bin/consul agent -config-dir /etc/consul.d
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+Type=notify
+[Install]
+WantedBy=multi-user.target
+EOCSU
+
+systemctl daemon-reload
+systemctl start consul &
+
+## install grafana
+wget https://dl.grafana.com/oss/release/grafana_5.4.2_amd64.deb
+sudo apt-get install -y adduser libfontconfig
+sudo dpkg -i grafana_5.4.2_amd64.deb
+
+# setting datasource
+echo "apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: ${prometheus_consul_private_ip}:9090
+" > /etc/grafana/provisioning/datasources/prometheus.yml
+
+# sudo service grafana-server start
+
+sudo systemctl daemon-reload
+sudo systemctl start grafana-server
+
+

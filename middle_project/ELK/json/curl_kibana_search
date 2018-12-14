@@ -1,0 +1,20 @@
+curl -X POST 'http://'${LOCAL_IPV4}':5601/api/saved_objects/search/' -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
+  {
+    "attributes": {
+      "title": "Discover_Filebeat",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"0cc668d0-1bde-11e9-9893-eb40f0b03e74\",\"highlightAll\":true,\"version\":true,\"query\":{\"language\":\"lucene\",\"query\":\"\"},\"filter\":[]}"
+      }
+    }
+  }
+'

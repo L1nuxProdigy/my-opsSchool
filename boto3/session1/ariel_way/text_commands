@@ -1,0 +1,8 @@
+
+
+./vpc.py --region eu-west-3 --cidr 10.21.0.0/16 --tenancy default
+
+
+./ig_and_dhcp_Options.py --region eu-west-3
+
+

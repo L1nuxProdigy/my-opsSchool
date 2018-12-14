@@ -1,0 +1,9 @@
+---
+- name: install ntp
+  yum: name=ntp state=present
+  
+- name: replace ntp.conf
+  template: src=/home/ec2-user/my-opsSchool/ansible/playbooks/firstHome_2018_12_26/ntp_template dest=/etc/ntp.conf
+  
+- name: restart ntp service
+  service: name=ntpd state=restarted

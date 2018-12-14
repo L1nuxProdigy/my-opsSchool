@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# installing Docker CE Prerequisites
+sudo apt-get update -y
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+# to validate the fingerprint use the following command
+# sudo apt-key fingerprint 0EBFCD88
+
+# Installing Docker CE
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get install docker-ce -y
+
+# installing Docker Compose, and making the downloaded binary executable
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chown ubuntu /usr/local/bin/docker-compose
+sudo chmod 774 /usr/local/bin/docker-compose
+
+# adding the running user ubuntu to the docker group
+sudo usermod -aG docker ubuntu
+
+# run app
+#sudo docker run -d -p 65433:65433 d0ckerprodigy/public:app_dummy

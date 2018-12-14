@@ -1,0 +1,8 @@
+---
+- name: create opsschool user
+  user: name=opsschool password={{ user_default_password }}
+    
+- name: install epel repo
+  yum: name={{ epel_yum_repo }} state=present
+  
+- include: ntp.yml

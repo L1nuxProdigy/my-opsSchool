@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# ha_proxy script location
+echo 'ha_proxy_path_configured = "/home/ubuntu/my-opsSchool/HAProxy/scripts/ha_proxy_configured"' >> /home/ubuntu/my-opsSchool/HAProxy/terraform/variables
+echo 'ha_proxy_path_unconfigured = "/home/ubuntu/my-opsSchool/HAProxy/scripts/ha_proxy_unconfigured"' >> /home/ubuntu/my-opsSchool/HAProxy/terraform/variables
+

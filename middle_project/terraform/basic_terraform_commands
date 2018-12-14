@@ -1,0 +1,5 @@
+terraform apply -var-file='./variables'
+terraform destroy -var-file='./variables'
+
+
+terraform destroy -var-file='./variables' -target aws_instance.kibana
