@@ -14,5 +14,6 @@ if len(client.describe_internet_gateways()['InternetGateways']) > 0:
     internet_gateway_id = client.describe_internet_gateways()['InternetGateways'][0]['InternetGatewayId']
     vpc = ec2.Vpc(vpc_id)
     vpc.detach_internet_gateway(InternetGatewayId=internet_gateway_id)
+    client.delete_internet_gateway(InternetGatewayId=internet_gateway_id)
 
 client.delete_vpc(VpcId=vpc_id)
