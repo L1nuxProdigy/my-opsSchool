@@ -17,3 +17,5 @@ if len(client.describe_internet_gateways()['InternetGateways']) > 0:
     client.delete_internet_gateway(InternetGatewayId=internet_gateway_id)
 
 client.delete_vpc(VpcId=vpc_id)
+dhcp_options_id = client.describe_dhcp_options()['DhcpOptions'][0]['DhcpOptionsId']
+client.delete_dhcp_options(DhcpOptionsId=dhcp_options_id)
