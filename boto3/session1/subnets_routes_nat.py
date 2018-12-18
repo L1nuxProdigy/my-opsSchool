@@ -35,6 +35,6 @@ public_route_table_resource.create_tags(Tags=[{'Key': 'Name','Value': 'Public_1c
 private_route_table = client.create_route_table(VpcId=vpc_id)
 private_route_table_id = private_route_table['RouteTable']['RouteTableId']
 client.create_route(DestinationCidrBlock='0.0.0.0/0',GatewayId=nat_gateway_id,RouteTableId=private_route_table_id)
-client.associate_route_table(RouteTableId=public_route_table_id,SubnetId=private_subnet_id)
+client.associate_route_table(RouteTableId=private_route_table_id,SubnetId=private_subnet_id)
 private_route_table_resource = ec2.RouteTable(private_route_table_id)
 private_route_table_resource.create_tags(Tags=[{'Key': 'Name','Value': 'Private_1c'}])

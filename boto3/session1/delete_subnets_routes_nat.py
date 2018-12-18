@@ -13,6 +13,13 @@ while client.describe_nat_gateways(Filters=[{'Name': 'nat-gateway-id','Values': 
 elastic_ip_allocation_id =  client.describe_addresses()['Addresses'][0]['AllocationId']
 client.release_address(AllocationId=elastic_ip_allocation_id)
 
+# delete route tables
+times_to_loop = len(client.describe_route_tables()['RouteTables'])
+for i in range(0,times_to_loop):
+    inside_loop = len(client.describe_route_tables()['RouteTables'][i]['Associations'])
+    print(client.describe_route_tables()['RouteTables'][i]['Associations'])
+    print('---------------------')
+
 # deletes all existing subnets
 times_to_loop = len(client.describe_subnets()['Subnets'])
 for i in range(0,times_to_loop):
