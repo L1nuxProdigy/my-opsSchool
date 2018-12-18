@@ -14,18 +14,16 @@ def pick_vpc_id(boto_client):
     choose_id = array_ids[i]
     return choose_id
 
-def args_parser():
+def arg_parser():
     parser = argparse.ArgumentParser(add_help=True, description="VPC Arguments")
     parser.add_argument("--region", "-r", help="Get target region",required=True)
     return parser.parse_args()
 
 if __name__ == '__main__':
     ## defining resources
-    ARGS = args_parser()
-    # ec2 = boto3.resource('ec2', region_name=ARGS.region)
-    # client = boto3.client('ec2',region_name=ARGS.region)
-    ec2 = boto3.resource('ec2')
-    client = boto3.client('ec2')
+    ARGS = arg_parser()
+    ec2 = boto3.resource('ec2', region_name=ARGS.region)
+    ec2 = boto3.client('ec2', region_name=ARGS.region)
     ## picking a vpc id and defining a vpc resource
     vpc_id = pick_vpc_id(client)
     vpc = ec2.Vpc(vpc_id)
