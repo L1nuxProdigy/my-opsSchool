@@ -22,8 +22,10 @@ def args_parser():
 if __name__ == '__main__':
     ## defining resources
     ARGS = args_parser()
-    ec2 = boto3.resource('ec2',region_name=ARGS.region)
-    client = boto3.client('ec2',region_name=ARGS.region)
+    # ec2 = boto3.resource('ec2', region_name=ARGS.region)
+    # client = boto3.client('ec2',region_name=ARGS.region)
+    ec2 = boto3.resource('ec2')
+    client = boto3.client('ec2')
     ## picking a vpc id and defining a vpc resource
     vpc_id = pick_vpc_id(client)
     vpc = ec2.Vpc(vpc_id)
