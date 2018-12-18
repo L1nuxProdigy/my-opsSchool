@@ -15,10 +15,16 @@ client.release_address(AllocationId=elastic_ip_allocation_id)
 
 # delete route tables
 times_to_loop = len(client.describe_route_tables()['RouteTables'])
+route_table_id = []
 for i in range(0,times_to_loop):
-    inside_loop = len(client.describe_route_tables()['RouteTables'][i]['Associations'])
-    print(client.describe_route_tables()['RouteTables'][i]['Associations'])
-    print('---------------------')
+    if client.describe_route_tables()['RouteTables'][i]['Associations'][0]['Main'] == False:
+        table_association_id = client.describe_route_tables()['RouteTables'][i]['Associations'][0]['RouteTableAssociationId']
+        client.disassociate_route_table(AssociationId=table_association_id)
+        route_table_id.append(client.describe_route_tables()['RouteTables'][i]['RouteTableId'])
+
+times_to_loop = len(route_table_id)
+for i in range(0,times_to_loop):
+    client.delete_route_table(RouteTableId=route_table_id[i])
 
 # deletes all existing subnets
 times_to_loop = len(client.describe_subnets()['Subnets'])
