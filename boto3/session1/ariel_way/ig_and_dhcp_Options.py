@@ -4,10 +4,8 @@ import argparse
 
 def dhcp_delete(boto_client,dhcp_id):
     dhcps_in_json = client.describe_dhcp_options()
-    print(dhcp_id)
     for dhcp_object in dhcps_in_json['DhcpOptions']:
         if dhcp_object['DhcpOptionsId'] != dhcp_id:
-            print(dhcp_object['DhcpOptionsId'])
             client.delete_dhcp_options(DhcpOptionsId=dhcp_object['DhcpOptionsId'])
 
 def pick_vpc_id(boto_client):
