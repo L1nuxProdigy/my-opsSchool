@@ -36,5 +36,5 @@ if __name__ == '__main__':
     dhcp_options_id = client.describe_dhcp_options()['DhcpOptions'][0]['DhcpOptionsId']
     vpc.associate_dhcp_options(DhcpOptionsId=dhcp_options_id)
     ## Delete Default Dhcp Options
-    # dhcp_options_id = client.describe_dhcp_options()['DhcpOptions'][1]['DhcpOptionsId']
-    # client.delete_dhcp_options(DhcpOptionsId=dhcp_options_id)
+    dhcp_options_id = client.describe_dhcp_options()['DhcpOptions'][0]['DhcpOptionsId']
+    client.delete_dhcp_options(DhcpOptionsId=dhcp_options_id)
