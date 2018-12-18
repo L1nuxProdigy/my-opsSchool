@@ -2,6 +2,12 @@
 import boto3
 import argparse
 
+def dhcp_delete(boto_client,dhcp_id):
+    dhcps_in_json = client.describe_dhcp_options()
+    for dhcp_object in dhcps_in_json['DhcpOptions']:
+        if dhcp_object['DhcpOptionsId'] != dhcp_id:
+            client.delete_dhcp_options(DhcpOptionsId=dhcp_object['DhcpOptionsId'])
+
 def pick_vpc_id(boto_client):
     array_ids = []
     index = 0
@@ -38,3 +44,4 @@ if __name__ == '__main__':
     ## Delete Default Dhcp Options
     # dhcp_options_id = client.describe_dhcp_options()['DhcpOptions'][1]['DhcpOptionsId']
     # client.delete_dhcp_options(DhcpOptionsId=dhcp_options_id)
+    dhcp_delete(client,dhcp_options_id)
