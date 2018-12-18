@@ -1,0 +1,1 @@
+./vpc.py --region eu-west-3 --cidr 10.21.0.0/16 --tenancy default
