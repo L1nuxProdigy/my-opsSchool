@@ -40,8 +40,8 @@ if __name__ == '__main__':
     internet_gateway_id = internet_gateway['InternetGateway']['InternetGatewayId']
     vpc.attach_internet_gateway(InternetGatewayId=internet_gateway_id)
     ## create and attach DHCP options
-    ec2.create_dhcp_options(DhcpConfigurations=[{'Key': 'domain-name-servers', 'Values': ['8.8.8.8', '8.8.4.4']}])
-    dhcp_options_id = client.describe_dhcp_options()['DhcpOptions'][0]['DhcpOptionsId']
+    dhcp_create = client.create_dhcp_options(DhcpConfigurations=[{'Key': 'domain-name-servers', 'Values': ['8.8.8.8', '8.8.4.4']}])
+    dhcp_options_id = dhcp_create['DhcpOptions']['DhcpOptionsId']
     vpc.associate_dhcp_options(DhcpOptionsId=dhcp_options_id)
     ## Delete all DHCP options (including the default) aside from the one created
     dhcp_delete(client,dhcp_options_id)
