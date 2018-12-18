@@ -16,8 +16,3 @@ if __name__ == '__main__':
     vpc = ec2.create_vpc(CidrBlock=ARGS.cidr, InstanceTenancy=ARGS.tenancy)
     vpc.wait_until_exists
     tag = vpc.create_tags(Tags=[{'Key': 'Name', 'Value': 'VPC_opsschool1'}])
-
-# ec2 = boto3.resource('ec2')
-# vpc = ec2.create_vpc(CidrBlock='172.16.0.0/16',InstanceTenancy='default')
-# vpc.wait_until_exists
-# tag = vpc.create_tags(Tags=[{'Key': 'Name','Value':'VPC_opsschool1'}])
