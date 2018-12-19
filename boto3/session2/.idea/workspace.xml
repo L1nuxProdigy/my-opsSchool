@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1e485569-bc29-44a5-8d74-007336127a15" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../session2/security_groups_startfile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../configBYariel.py" beforeDir="false" />
+    <list default="true" id="e4741e98-1661-495a-a185-f9a03ca82a9b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/security_groups_startfile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../session1/ariel_way/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../session1/ariel_way/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../session1/configBYariel.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,82 +13,66 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FUSProjectUsageTrigger">
-    <session id="-282247453">
+    <session id="-1054720526">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="4" />
+          <entry key="py" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="4" />
+          <entry key="Python" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2024" />
+          <entry key="py" value="217" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="2024" />
+          <entry key="Python" value="217" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vpc.py">
+        <entry file="file://$PROJECT_DIR$/configBYariel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="75" selection-start-line="14" selection-start-column="4" selection-end-line="15" selection-end-column="75" />
-              <folding>
-                <element signature="e#19#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ig_and_dhcp_Options.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="31" column="57" selection-start-line="30" selection-start-column="4" selection-end-line="31" selection-end-column="57" />
-              <folding>
-                <element signature="e#19#31#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="34">
+              <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/delete_vpc.py">
+        <entry file="file://$PROJECT_DIR$/security_groups_startfile.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="8" column="51" lean-forward="true" selection-start-line="8" selection-end-line="8" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/new.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-column="18" />
+            <state relative-caret-position="136">
+              <caret line="8" lean-forward="true" selection-start-line="5" selection-end-line="8" />
+              <folding>
+                <element signature="e#19#31#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -96,14 +80,13 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/vpc.py" />
-        <option value="$PROJECT_DIR$/ig_and_dhcp_Options.py" />
-        <option value="$PROJECT_DIR$/new.py" />
+        <option value="$PROJECT_DIR$/configBYariel.py" />
+        <option value="$PROJECT_DIR$/security_groups_startfile.py" />
       </list>
     </option>
   </component>
@@ -123,8 +106,8 @@
         <subPane>
           <expand>
             <path>
-              <item name="ariel_way" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ariel_way" type="462c0819:PsiDirectoryNode" />
+              <item name="session2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="session2" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -150,11 +133,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1e485569-bc29-44a5-8d74-007336127a15" name="Default Changelist" comment="" />
-      <created>1545139424211</created>
+      <changelist id="e4741e98-1661-495a-a185-f9a03ca82a9b" name="Default Changelist" comment="" />
+      <created>1545247867499</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1545139424211</updated>
+      <updated>1545247867499</updated>
     </task>
     <servers />
   </component>
@@ -162,9 +145,13 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24925596" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32843137" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -172,10 +159,6 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -185,37 +168,20 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ig_and_dhcp_Options.py">
+    <entry file="file://$PROJECT_DIR$/configBYariel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="31" column="57" selection-start-line="30" selection-start-column="4" selection-end-line="31" selection-end-column="57" />
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/security_groups_startfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" lean-forward="true" selection-start-line="5" selection-end-line="8" />
           <folding>
             <element signature="e#19#31#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/new.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vpc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="75" selection-start-line="14" selection-start-column="4" selection-end-line="15" selection-end-column="75" />
-          <folding>
-            <element signature="e#19#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/delete_vpc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="8" column="51" lean-forward="true" selection-start-line="8" selection-end-line="8" selection-end-column="51" />
         </state>
       </provider>
     </entry>
