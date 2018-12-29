@@ -121,7 +121,7 @@ resource "aws_instance" "consul_client_dummy" {
 	}
 	
 	tags = {
-	Name = "Terraform_Instance"
+	Name = "Terraform_Consul_Client"
   }
 
 	provisioner "remote-exec" {
@@ -144,7 +144,7 @@ resource "aws_instance" "consul_server_dummy" {
 	}
 	
 	tags = {
-	Name = "Terraform_Instance"
+	Name = "Terraform_Consul_Server"
   }
 
 	provisioner "remote-exec" {
