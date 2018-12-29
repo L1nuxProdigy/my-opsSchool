@@ -2,20 +2,13 @@
 # VARIABLES
 ##################################################################################
 
-### Connection Vars ###
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
 variable "private_key_path" {}
+variable "user_data_dummy_exporter_path" {}
 variable "key_name" {
   default = "paris"
 }
-
-### Machines Configurations Scripts ###
-variable "user_data_dummy_exporter_path" {}
-variable "consul_client_path" {}
-variable "consul_server_path" {}
-
-
 
 ##################################################################################
 # PROVIDERS
@@ -108,7 +101,7 @@ resource "aws_security_group" "SecurityGroup_main" {
 # EC2 Resources
 ##################################################################################
 
-resource "aws_instance" "consul_client_dummy" {
+resource "aws_instance" "nginx" {
 	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
@@ -125,32 +118,7 @@ resource "aws_instance" "consul_client_dummy" {
   }
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.user_data_dummy_exporter_path)}",
-			"${file(var.consul_client_path)}"
-			]
-	}
-}
-
-resource "aws_instance" "consul_server_dummy" {
-	ami           = "ami-08182c55a1c188dee"
-	instance_type = "t2.micro"
-	key_name        = "${var.key_name}"
-	subnet_id = "${aws_subnet.Subnet_main.id}"
-	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
-
-	connection {
-		user        = "ubuntu"
-		private_key = "${file(var.private_key_path)}"
-	}
-	
-	tags = {
-	Name = "Terraform_Instance"
-  }
-
-	provisioner "remote-exec" {
-		inline = ["${file(var.user_data_dummy_exporter_path)}",
-			"${file(var.consul_server_path)}"
-			]
+		inline = ["${file(var.user_data_dummy_exporter_path)}"]
 	}
 }
 
@@ -159,5 +127,5 @@ resource "aws_instance" "consul_server_dummy" {
 ##################################################################################
 
 output "aws_instance_public_dns" {
-	value = "${aws_instance.consul_client_dummy.public_dns}"
+	value = "${aws_instance.nginx.public_dns}"
 }
