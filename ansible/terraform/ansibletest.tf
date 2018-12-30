@@ -11,6 +11,7 @@ variable "key_name" {
 }
 
 ### Machines Configurations Scripts ###
+variable "ansible_server_script" {}
 
 
 
@@ -64,7 +65,7 @@ resource "aws_instance" "ansible_node_1" {
     }
 
 	provisioner "remote-exec" {
-		inline = []
+		inline = ["${file(var.ansible_server_script}"]
 	}
 }
 
