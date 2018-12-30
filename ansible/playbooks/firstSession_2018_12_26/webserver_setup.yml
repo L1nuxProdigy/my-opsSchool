@@ -1,6 +1,6 @@
 ---
-- name: create user, add repo, install and configure ntp
-  hosts: node
+- name: install httpd, replace html, add line to hosts file
+  hosts: webserver
   remote_user: ec2-user
   become: yes
   vars_files: ['credentials.yml']
