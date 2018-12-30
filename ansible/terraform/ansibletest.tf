@@ -45,7 +45,6 @@ resource "aws_instance" "ansible_server" {
 
 	provisioner "remote-exec" {
 		inline = []
-			]
 	}
 }
 
@@ -66,7 +65,6 @@ resource "aws_instance" "ansible_node_1" {
 
 	provisioner "remote-exec" {
 		inline = []
-			]
 	}
 }
 
