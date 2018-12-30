@@ -8,4 +8,10 @@
   tasks:
   - name: create opsschool user
     user: name=opsschool password={{user_default_password}}
+    
+  - name: install epel repo
+    yum: name=epel-release state=present
+    
+  - name: install ntp
+    yum: name=ntp state=present
   
