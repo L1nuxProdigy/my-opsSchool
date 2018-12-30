@@ -46,7 +46,7 @@ resource "aws_instance" "ansible_server" {
     }
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.ansible_server_script}"]
+		inline = ["${file(var.ansible_server_script)}"]
 	}
 }
 
@@ -66,7 +66,7 @@ resource "aws_instance" "ansible_node_1" {
     }
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.ansible_node_script}"]
+		inline = ["${file(var.ansible_node_script)}"]
 	}
 }
 
