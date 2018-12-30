@@ -15,5 +15,5 @@
   - name: add text to /etc/hosts
     lineinfile:
       path: /etc/hosts
-      line: 'halllllllllllllo'
+      line: '{{node1_ip}} {{node1_fqdn}}'
   
