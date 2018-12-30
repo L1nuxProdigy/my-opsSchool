@@ -4,3 +4,8 @@
 sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
 sudo yum update -y
 sudo yum install ansible -y
+sudo yum install git -yum
+
+## cloning git repo
+https://github.com/L1nuxProdigy/my-opsSchool
+#chown ec2-user -R /home/ec2-user/my-opsschool
