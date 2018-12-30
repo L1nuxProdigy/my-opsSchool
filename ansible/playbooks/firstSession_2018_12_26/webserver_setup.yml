@@ -12,7 +12,8 @@
   - name: replace html
     template: src=/home/ec2-user/my-opsSchool/ansible/playbooks/firstSession_2018_12_26/index_template dest=/var/www/html
     
-  - lineinfile:
-    path: /etc/hosts
-    line: 'halllllllllllllo'
+  - name: add text to /etc/hosts
+    lineinfile:
+      path: /etc/hosts
+      line: 'halllllllllllllo'
   
