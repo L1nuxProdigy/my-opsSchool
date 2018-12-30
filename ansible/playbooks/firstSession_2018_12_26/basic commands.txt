@@ -1,2 +1,0 @@
-## running a playbook with a hosts file
-ansible-playbook -i hosts configure_base_server.yml

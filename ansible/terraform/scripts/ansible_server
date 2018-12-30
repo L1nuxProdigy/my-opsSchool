@@ -38,4 +38,5 @@ g8KaG7sfxhMybQw5N9a4JWvqScWRJRmFnl8E51eTSqVK7dlybFaSWw8URJDCk2ti
 TGWH+fm5UNhQoslsMLTAUxJ3Q064WnS3QZ5eA6bOQLMB3gcZqaCL5Q==
 -----END RSA PRIVATE KEY-----" > /home/ec2-user/.ssh/id_rsa
 
+# to make the ssh key usable in rhel permissions should be limited
 chmod 0600 /home/ec2-user/.ssh/id_rsa
