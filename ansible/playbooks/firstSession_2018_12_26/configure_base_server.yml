@@ -1,6 +1,6 @@
 ---
 - name: create user, add repo, install and configure ntp
-  hosts: ?
+  hosts: node
   remote_user: ec2-user
   become: yes
   vars_files: ['credentials.yml']
