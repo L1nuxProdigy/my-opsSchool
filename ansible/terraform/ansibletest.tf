@@ -41,7 +41,7 @@ resource "aws_instance" "ansible_server" {
 	
 	tags = {
 	Name = "Terra_Ansible_Server"
-  }
+    }
 
 	provisioner "remote-exec" {
 		inline = []
@@ -62,7 +62,7 @@ resource "aws_instance" "ansible_node_1" {
 	
 	tags = {
 	Name = "Terra_Ansible_Node_1"
-  }
+    }
 
 	provisioner "remote-exec" {
 		inline = []
