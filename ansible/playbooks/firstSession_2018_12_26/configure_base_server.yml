@@ -10,7 +10,7 @@
     user: name=opsschool password={{user_default_password}}
     
   - name: install epel repo
-    yum: name=epel-release state=present
+    yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present
     
   - name: install ntp
     yum: name=ntp state=present
