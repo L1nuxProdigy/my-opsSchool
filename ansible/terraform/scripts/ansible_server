@@ -6,6 +6,11 @@ sudo yum update -y
 sudo yum install ansible -y
 sudo yum install git -y
 
+## installing pip3 and passlib library with pip
+sudo yum install python34-setuptools -y
+sudo easy_install-3.4 pip -y
+sudo pip3 install passlib
+
 ## cloning git repo
 git clone https://github.com/L1nuxProdigy/my-opsSchool
 
