@@ -158,9 +158,11 @@ resource "aws_instance" "consul_server" {
 	tags = {
 	Name = "Terraform_Consul_Server"
   }
+  
+  user_data = ["${file(var.my_consul_server_path)}"]
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.my_consul_server_path)}"]
+		inline = []
 	}
 }
 
