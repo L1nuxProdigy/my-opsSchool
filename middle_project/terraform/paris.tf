@@ -169,5 +169,5 @@ resource "aws_instance" "consul_server" {
 ##################################################################################
 
 output "aws_instance_public_dns" {
-	value = "${aws_instance.consul_client_dummy.public_dns}"
+	value = "${aws_instance.dummy_exporter1.public_dns}"
 }
