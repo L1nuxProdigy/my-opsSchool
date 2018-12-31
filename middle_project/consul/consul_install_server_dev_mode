@@ -10,5 +10,5 @@ sudo unzip consul_1.4.0_linux_amd64.zip
 sudo mv ./consul /usr/local/bin/consul
 sudo chown ubuntu /usr/local/bin/consul
 
-consul agent -dev -node consul_server
+nohup consul agent -dev -node consul_server
 
