@@ -4,8 +4,8 @@
 echo 'user_data_dummy_exporter_path = "/home/ubuntu/my-opsSchool/middle_project/containers/dummy_exporter_container"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
 
 # andrei consul
-echo 'consul_client_path = "/home/ubuntu/my-opsSchool/andrei_middle_project/consul/client-consul-nomad-systemd-docker-dnsmasq-userdata-bootstrap"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
-echo 'consul_server_path = "/home/ubuntu/my-opsSchool/andrei_middle_project/consul/server-consul-nomad-systemd-dnsmasq-userdata-bootstrap"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+echo 'consul_client_path = "/home/ubuntu/my-opsSchool/andrei_middle_project/consul/andrei_client-consul-nomad-systemd-docker-dnsmasq-userdata-bootstrap"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+echo 'consul_server_path = "/home/ubuntu/my-opsSchool/andrei_middle_project/consul/andrei_server-consul-nomad-systemd-dnsmasq-userdata-bootstrap"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
 
 # my consul tryouts
 echo 'my_consul_server_path = "/home/ubuntu/my-opsSchool/andrei_middle_project/consul/consul_install_server_dev_mode"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
