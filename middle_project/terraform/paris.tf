@@ -122,7 +122,7 @@ resource "aws_security_group" "SecurityGroup_main" {
 # EC2 Resources
 ##################################################################################
 
-resource "aws_instance" "consul_client_dummy" {
+resource "aws_instance" "dummy_exporter1" {
 	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
@@ -135,17 +135,15 @@ resource "aws_instance" "consul_client_dummy" {
 	}
 	
 	tags = {
-	Name = "Terraform_Consul_Client"
+	Name = "Terraform_Dummy_exporter"
   }
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.user_data_dummy_exporter_path)}",
-			"${file(var.consul_client_path)}"
-			]
+		inline = ["${file(var.user_data_dummy_exporter_path)}"]
 	}
 }
 
-resource "aws_instance" "consul_server_dummy" {
+resource "aws_instance" "consul_server" {
 	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
@@ -162,9 +160,7 @@ resource "aws_instance" "consul_server_dummy" {
   }
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.user_data_dummy_exporter_path)}",
-			"${file(var.my_consul_server_path)}"
-			]
+		inline = ["${file(var.my_consul_server_path)}"]
 	}
 }
 
