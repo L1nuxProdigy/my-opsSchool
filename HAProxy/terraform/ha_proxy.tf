@@ -11,8 +11,7 @@ variable "key_name" {
 }
 
 ### Machines Configurations Scripts ###
-variable "ansible_server_script" {}
-variable "ansible_node_script" {}
+variable "ha_proxy_path" {}
 
 
 
@@ -42,11 +41,11 @@ resource "aws_instance" "HA_Proxy" {
 	}
 	
 	tags = {
-	Name = "Terra_Ansible_Server"
+	Name = "Terra_HA_Proxy"
     }
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.ansible_server_script)}"]
+		inline = ["${file(var.ha_proxy_path)}"]
 	}
 }
 

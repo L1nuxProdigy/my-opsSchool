@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # ha_proxy script location
-echo 'my_consul_server_path = "/home/ubuntu/my-opsSchool/HAProxy/scripts/ha_proxy"' >> /home/ubuntu/my-opsSchool/HAProxy/terraform/variables
+echo 'ha_proxy_path = "/home/ubuntu/my-opsSchool/HAProxy/scripts/ha_proxy"' >> /home/ubuntu/my-opsSchool/HAProxy/terraform/variables
 
