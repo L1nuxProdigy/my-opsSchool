@@ -11,7 +11,8 @@ variable "key_name" {
 }
 
 ### Machines Configurations Scripts ###
-variable "ha_proxy_path" {}
+variable "ha_proxy_path_configured" {}
+variable "ha_proxy_path_unconfigured" {}
 
 
 
@@ -29,7 +30,7 @@ provider "aws" {
 # EC2 Resources
 ##################################################################################
 
-resource "aws_instance" "HA_Proxy" {
+resource "aws_instance" "HA_Proxy_Configured" {
 	ami           = "ami-c86c3f23"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
@@ -41,11 +42,31 @@ resource "aws_instance" "HA_Proxy" {
 	}
 	
 	tags = {
-	Name = "Terra_HA_Proxy"
+	Name = "HA_Proxy_Configured_Terra"
     }
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.ha_proxy_path)}"]
+		inline = ["${file(var.ha_proxy_path_configured)}"]
+	}
+}
+
+resource "aws_instance" "HA_Proxy_UnConfigured" {
+	ami           = "ami-c86c3f23"
+	instance_type = "t2.micro"
+	key_name        = "${var.key_name}"
+	vpc_security_group_ids = ["sg-02e7cd2c6090514d4"]
+
+	connection {
+		user        = "ec2-user"
+		private_key = "${file(var.private_key_path)}"
+	}
+	
+	tags = {
+	Name = "HA_Proxy_Unconfigured_Terra"
+    }
+
+	provisioner "remote-exec" {
+		inline = ["${file(var.ha_proxy_path_unconfigured)}"]
 	}
 }
 
@@ -54,5 +75,5 @@ resource "aws_instance" "HA_Proxy" {
 ##################################################################################
 
 output "aws_instance_public_dns" {
-	value = "${aws_instance.HA_Proxy.public_dns}"
+	value = "${aws_instance.HA_Proxy_Configured.public_dns}"
 }
