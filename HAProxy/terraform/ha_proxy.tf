@@ -31,7 +31,7 @@ provider "aws" {
 
 resource "aws_instance" "HA_Proxy" {
 	ami           = "ami-c86c3f23"
-	instance_type = "t2.medium"
+	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
 	vpc_security_group_ids = ["sg-02e7cd2c6090514d4"]
 

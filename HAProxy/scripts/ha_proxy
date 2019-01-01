@@ -12,22 +12,22 @@ local_ipv4=$(curl "http://169.254.169.254/latest/meta-data/local-ipv4")
 
 ## the text to add to enable ha proxy stats ##
 echo "listen  stats   $local_ipv4:1936
-        mode            http
-        log             global
+    mode            http
+    log             global
 
-        maxconn 10
+    maxconn 10
 
-        clitimeout      100s
-        srvtimeout      100s
-        contimeout      100s
-        timeout queue   100s
+    clitimeout      100s
+    srvtimeout      100s
+    contimeout      100s
+    timeout queue   100s
 
-        stats enable
-        stats hide-version
-        stats refresh 30s
-        stats show-node
-        stats auth admin:password
-        stats uri  /stats" > /home/ec2-user/file
+    stats enable
+    stats hide-version
+    stats refresh 30s
+    stats show-node
+    stats auth admin:password
+    stats uri  /stats" > /home/ec2-user/file
 
 ## manipulate the text into the ha proxy configuration file
 ## sudo mv /home/ec2-user/orig /etc/haproxy/haproxy.cfg
