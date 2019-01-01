@@ -1,5 +1,5 @@
 #!/bin/bash
-
+## haproxy -v 1.5.18
 ## install ha_proxy ##
 sudo yum install haproxy -y
 
@@ -10,7 +10,7 @@ sudo yum install git -y
 ## whats my inner ip ##
 local_ipv4=$(curl "http://169.254.169.254/latest/meta-data/local-ipv4")
 
-## the text to add to enable ha proxy stats ## 1.5.18
+## the text to add to enable ha proxy stats ##
 echo "listen  stats   $local_ipv4:1936
         mode            http
         log             global
@@ -27,7 +27,7 @@ echo "listen  stats   $local_ipv4:1936
         stats refresh 30s
         stats show-node
         stats auth admin:password
-        stats uri  /stats > /home/ec2-user/file
+        stats uri  /stats" > /home/ec2-user/file
 
 ## manipulate the text into the ha proxy configuration file
 sudo cat /etc/haproxy/haproxy.cfg >/home/ec2-user/orig
