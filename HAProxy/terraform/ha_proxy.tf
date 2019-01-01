@@ -34,7 +34,7 @@ resource "aws_instance" "HA_Proxy_Configured" {
 	ami           = "ami-c86c3f23"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
-	vpc_security_group_ids = ["sg-02e7cd2c6090514d4"]
+	vpc_security_group_ids = ["sg-0bc315224de07ef04"]
 
 	connection {
 		user        = "ec2-user"
