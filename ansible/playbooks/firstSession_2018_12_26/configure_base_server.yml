@@ -3,14 +3,14 @@
   hosts: nodes
   remote_user: ec2-user
   become: yes
-  vars_files: ['credentials.yml']
+  vars_files: ['credentials.yml','variables.yml']
   
   tasks:
   - name: create opsschool user
-    user: name=opsschool password={{user_default_password}}
+    user: name=opsschool password={{ user_default_password }}
     
   - name: install epel repo
-    yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present
+    yum: name={{ epel_yum_repo }} state=present
     
   - name: install ntp
     yum: name=ntp state=present
