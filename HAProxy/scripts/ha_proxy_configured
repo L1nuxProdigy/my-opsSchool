@@ -11,7 +11,7 @@ sudo yum install git -y
 local_ipv4=$(curl "http://169.254.169.254/latest/meta-data/local-ipv4")
 
 ## the text to add to enable ha proxy stats ##
-echo "listen  stats bind $local_ipv4:1936
+echo "listen  stats bind $local_ipv4:80
     mode            http
     log             global
 

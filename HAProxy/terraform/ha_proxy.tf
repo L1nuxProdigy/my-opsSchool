@@ -50,26 +50,6 @@ resource "aws_instance" "HA_Proxy_Configured" {
 	}
 }
 
-resource "aws_instance" "HA_Proxy_UnConfigured" {
-	ami           = "ami-c86c3f23"
-	instance_type = "t2.micro"
-	key_name        = "${var.key_name}"
-	vpc_security_group_ids = ["sg-02e7cd2c6090514d4"]
-
-	connection {
-		user        = "ec2-user"
-		private_key = "${file(var.private_key_path)}"
-	}
-	
-	tags = {
-	Name = "HA_Proxy_Unconfigured_Terra"
-    }
-
-	provisioner "remote-exec" {
-		inline = ["${file(var.ha_proxy_path_unconfigured)}"]
-	}
-}
-
 ##################################################################################
 # OUTPUT
 ##################################################################################
