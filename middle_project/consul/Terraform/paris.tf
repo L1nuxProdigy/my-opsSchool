@@ -32,7 +32,7 @@ provider "aws" {
 # IAM Resources
 ##################################################################################
 resource "aws_iam_role_policy" "test_policy" {
-  name = "test_policy"
+  name = "Consul-Describe-Policy"
   role = "${aws_iam_role.test_role.id}"
 
   policy = <<EOF
@@ -41,7 +41,7 @@ resource "aws_iam_role_policy" "test_policy" {
   "Statement": [
     {
       "Action": [
-        "ec2:Describe*"
+        "ec2:DescribeInstance"
       ],
       "Effect": "Allow",
       "Resource": "*"
@@ -52,7 +52,7 @@ EOF
 }
 
 resource "aws_iam_role" "test_role" {
-  name = "test_role"
+  name = "Consul-Role"
 
   assume_role_policy = <<EOF
 {
