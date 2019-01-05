@@ -35,6 +35,7 @@ resource "aws_iam_policy" "policy" {
   name        = "Describe-For-Consul"
   path        = "/"
   description = "Name Explenatory"
+  role = "${aws_iam_role.test_role.id}
 
   policy = <<EOF
 {
@@ -54,6 +55,7 @@ EOF
 
 resource "aws_iam_role" "test_role" {
   name = "test_role"
+  description = "Testing"
 
   assume_role_policy = <<EOF
 {
@@ -65,13 +67,12 @@ resource "aws_iam_role" "test_role" {
         "Service": "ec2.amazonaws.com"
       },
       "Effect": "Allow",
-      "Sid": ""
     }
   ]
 }
 EOF
 
   tags = {
-      tag-key = "tag-value"
+      Name = "Created_by_Terraform"
   }
 }
