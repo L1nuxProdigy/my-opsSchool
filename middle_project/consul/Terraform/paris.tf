@@ -46,7 +46,7 @@ resource "aws_iam_role_policy" "Consul_IAM_Policy" {
   "Statement": [
     {
       "Action": [
-        "ec2:DescribeInstance"
+        "ec2:DescribeInstances"
       ],
       "Effect": "Allow",
       "Resource": "*"
