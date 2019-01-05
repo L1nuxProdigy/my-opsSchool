@@ -67,6 +67,7 @@ resource "aws_iam_role" "test_role" {
         "Service": "ec2.amazonaws.com"
       },
       "Effect": "Allow",
+	  "Sid": ""
     }
   ]
 }
