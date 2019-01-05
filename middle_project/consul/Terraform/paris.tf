@@ -34,7 +34,6 @@ provider "aws" {
 resource "aws_iam_role_policy" "test_policy" {
   name = "Consul-Describe-Policy"
   role = "${aws_iam_role.test_role.id}"
-  description = "Created By Terraform"
 
   policy = <<EOF
 {
