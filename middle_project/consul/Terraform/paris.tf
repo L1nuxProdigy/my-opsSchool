@@ -31,7 +31,12 @@ provider "aws" {
 ##################################################################################
 # IAM Resources
 ##################################################################################
-resource "aws_iam_role_policy" "test_policy" {
+resource "aws_iam_instance_profile" "Consul_IAM_Profile" {
+  name  = "test_profile"
+  roles = ["${aws_iam_role.Consul_IAM_Role.name}"]
+}
+
+resource "aws_iam_role_policy" "Consul_IAM_Policy" {
   name = "Consul-Describe-Policy"
   role = "${aws_iam_role.test_role.id}"
 
@@ -51,7 +56,7 @@ resource "aws_iam_role_policy" "test_policy" {
 EOF
 }
 
-resource "aws_iam_role" "test_role" {
+resource "aws_iam_role" "Consul_IAM_Role" {
   name = "Consul-Role"
   description = "Created By Terraform"
 
@@ -178,6 +183,7 @@ resource "aws_instance" "consul_client_dummy" {
 	key_name        = "${var.key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
+	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
 
 	connection {
 		user        = "ubuntu"
