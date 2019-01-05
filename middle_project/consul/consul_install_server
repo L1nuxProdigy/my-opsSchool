@@ -17,10 +17,10 @@ LOCAL_IPV4=$(curl "http://169.254.169.254/latest/meta-data/local-ipv4")
 
 cat << EOCCF >/etc/consul.d/server.hcl
 advertise_addr = "${LOCAL_IPV4}"
-bootstrap_expect = 3
+bootstrap_expect = 1
 client_addr =  "0.0.0.0"
 data_dir = "/var/lib/consul"
-datacenter = "${DATACENTER_NAME}"
+datacenter = "dc1"
 enable_syslog = true
 log_level = "DEBUG"
 recursors =  ["127.0.0.1"]
