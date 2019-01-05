@@ -10,4 +10,8 @@ sudo unzip consul_1.4.0_linux_amd64.zip
 sudo mv ./consul /usr/local/bin/consul
 sudo chown ubuntu /usr/local/bin/consul
 
-nohup consul agent -dev -node consul_server
+
+## consul server command
+sudo mkdir /var/lib/consul /etc/consul.d
+sudo nohup consul agent -server -bootstrap-expect 1 -data-dir /var/lib/consul -config-dir /etc/consul.d -node="consul-server"
+
