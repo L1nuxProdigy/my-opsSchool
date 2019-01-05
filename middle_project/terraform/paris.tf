@@ -13,6 +13,8 @@ variable "key_name" {
 ### Machines Configurations Scripts ###
 variable "user_data_dummy_exporter_path" {}
 variable "consul_server_path" {}
+variable "prometheus_consul_server_path" {}
+
 
 
 ##################################################################################
@@ -145,6 +147,12 @@ resource "aws_security_group" "SecurityGroup_main" {
 		cidr_blocks = ["0.0.0.0/0"]
       }
 	ingress {
+		from_port   = 9090
+		to_port     = 9090
+		protocol    = "TCP"
+		cidr_blocks = ["0.0.0.0/0"]
+      }
+	ingress {
 		from_port   = 8300
 		to_port     = 8300
 		protocol    = "TCP"
@@ -224,7 +232,7 @@ resource "aws_instance" "App_with_Consul_client-2" {
 	user_data = "${file(var.user_data_dummy_exporter_path)}"
 }
 
-resource "aws_instance" "consul_server" {
+resource "aws_instance" "prometheus_consul_server" {
 	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
@@ -240,7 +248,7 @@ resource "aws_instance" "consul_server" {
 	Name = "Terraform_Consul_Server"
 	}
 	
-	user_data = "${file(var.consul_server_path)}"
+	user_data = "${file(var.prometheus_consul_server_path)}"
 	
 	provisioner "remote-exec" {
 		inline = []
