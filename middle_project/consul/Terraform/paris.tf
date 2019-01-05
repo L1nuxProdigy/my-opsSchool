@@ -194,7 +194,7 @@ resource "aws_instance" "consul_client_dummy" {
 
 	provisioner "remote-exec" {
 		inline = ["${file(var.user_data_dummy_exporter_path)}",
-			"${file(var.consul_clean_path)}"]
+			"${file(var.consul_client_path)}"]
 	}
 }
 
@@ -215,7 +215,7 @@ resource "aws_instance" "consul_server_dummy" {
   }
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.consul_clean_path)}"]
+		inline = ["${file(var.consul_server_path)}"]
 	}
 }
 
