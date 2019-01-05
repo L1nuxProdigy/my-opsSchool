@@ -201,7 +201,7 @@ resource "aws_instance" "consul_client_dummy" {
 	user_data = ""
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.consul_client_path)}"]
+		
 	}
 }
 
