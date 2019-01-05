@@ -14,8 +14,6 @@ variable "key_name" {
 variable "user_data_dummy_exporter_path" {}
 variable "consul_client_path" {}
 variable "consul_server_path" {}
-variable "consul_clean_path" {}
-
 
 
 ##################################################################################
