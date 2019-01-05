@@ -32,13 +32,13 @@ provider "aws" {
 # IAM Resources
 ##################################################################################
 resource "aws_iam_instance_profile" "Consul_IAM_Profile" {
-  name  = "test_profile"
+  name  = "Consul_Profile"
   roles = ["${aws_iam_role.Consul_IAM_Role.name}"]
 }
 
 resource "aws_iam_role_policy" "Consul_IAM_Policy" {
   name = "Consul-Describe-Policy"
-  role = "${aws_iam_role.test_role.id}"
+  role = "${aws_iam_role.Consul_IAM_Role_role.id}"
 
   policy = <<EOF
 {
