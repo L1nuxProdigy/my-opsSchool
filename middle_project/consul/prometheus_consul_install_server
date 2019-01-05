@@ -9,7 +9,7 @@ echo "  - job_name: dummy_consul_job
       - server: 'localhost:8500'
     relabel_configs:
       - source_labels: [__meta_consul_tags]
-        regex: .*,nop,.*
+        regex: .*,dummy,.*
         action: keep
       - source_labels: [__meta_consul_service]
         target_label: DUMMY_RELABEL" >> ./prometheus.yml
