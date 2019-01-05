@@ -31,9 +31,8 @@ provider "aws" {
 ##################################################################################
 # IAM Resources
 ##################################################################################
-resource "aws_iam_policy" "policy" {
-  name        = "Describe-For-Consul"
-  description = "Name Explenatory"
+resource "aws_iam_role_policy" "test_policy" {
+  name = "test_policy"
   role = "${aws_iam_role.test_role.id}"
 
   policy = <<EOF
@@ -42,7 +41,7 @@ resource "aws_iam_policy" "policy" {
   "Statement": [
     {
       "Action": [
-        "ec2:DescribeInstances*"
+        "ec2:Describe*"
       ],
       "Effect": "Allow",
       "Resource": "*"
@@ -54,7 +53,6 @@ EOF
 
 resource "aws_iam_role" "test_role" {
   name = "test_role"
-  description = "Testing"
 
   assume_role_policy = <<EOF
 {
@@ -66,13 +64,9 @@ resource "aws_iam_role" "test_role" {
         "Service": "ec2.amazonaws.com"
       },
       "Effect": "Allow",
-	  "Sid": ""
+      "Sid": ""
     }
   ]
 }
 EOF
-
-  tags = {
-      Name = "Created_by_Terraform"
-  }
 }
