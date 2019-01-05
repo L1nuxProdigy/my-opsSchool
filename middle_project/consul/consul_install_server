@@ -15,6 +15,8 @@ sudo chown ubuntu /usr/local/bin/consul
 sudo mkdir /var/lib/consul /etc/consul.d
 LOCAL_IPV4=$(curl "http://169.254.169.254/latest/meta-data/local-ipv4")
 
+sudo -i
+
 cat << EOCCF >/etc/consul.d/server.hcl
 advertise_addr = "${LOCAL_IPV4}"
 bootstrap_expect = 1
@@ -45,6 +47,6 @@ Type=notify
 WantedBy=multi-user.target
 EOCSU
 
-systemctl daemon-reload
-systemctl start consul
+sudo systemctl daemon-reload
+sudo systemctl start consul
 
