@@ -33,7 +33,7 @@ provider "aws" {
 ##################################################################################
 resource "aws_iam_instance_profile" "Consul_IAM_Profile" {
   name  = "Consul_Profile"
-  role = ["${aws_iam_role.Consul_IAM_Role.name}"]
+  role = "${aws_iam_role.Consul_IAM_Role.name}"
 }
 
 resource "aws_iam_role_policy" "Consul_IAM_Policy" {
