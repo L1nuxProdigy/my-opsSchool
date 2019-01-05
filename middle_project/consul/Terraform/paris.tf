@@ -33,7 +33,6 @@ provider "aws" {
 ##################################################################################
 resource "aws_iam_policy" "policy" {
   name        = "Describe-For-Consul"
-  path        = "/"
   description = "Name Explenatory"
   role = "${aws_iam_role.test_role.id}"
 
