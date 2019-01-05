@@ -21,4 +21,4 @@ sudo chmod 774 /usr/local/bin/docker-compose
 sudo usermod -aG docker ubuntu
 
 # run app
-# sudo docker run -d -p 65433:65433 d0ckerprodigy/public:app_dummy
+sudo docker run -d -p 65433:65433 d0ckerprodigy/public:app_dummy
