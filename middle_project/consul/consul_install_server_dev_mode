@@ -12,3 +12,22 @@ sudo chown ubuntu /usr/local/bin/consul
 
 nohup consul agent -dev -node consul_server
 
+
+## server
+sudo mkdir /var/lib/consul /etc/consul.d
+sudo consul agent -server -bootstrap-expect 1 -data-dir /var/lib/consul -config-dir /etc/consul.d -node="consul-server"
+
+## client
+	
+sudo mkdir /var/lib/consul /etc/consul.d
+LOCAL_IPV4=$(curl "http://169.254.169.254/latest/meta-data/local-ipv4")
+sudo consul agent -data-dir /var/lib/consul -config-dir /var/lib/consul -bind $LOCAL_IPV4 -retry-join "provider=aws tag_key=Name tag_value=Terraform_Consul_Server"
+
+## join
+consul join 10.0.1.68
+
+## require being root
+sudo cat << EODMCF >/etc/dnsmasq.d/10-consul
+# Enable forward lookup of the 'consul' domain:
+server=/consul/127.0.0.1#8600
+EODMCF
