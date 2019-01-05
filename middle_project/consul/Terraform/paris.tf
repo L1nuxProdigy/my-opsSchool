@@ -190,11 +190,13 @@ resource "aws_instance" "consul_client_dummy" {
 	
 	tags = {
 	Name = "Terraform_Consul_Client"
-  }
+	}
+	
+	user_data = "${file(var.consul_client_path)}"
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.user_data_dummy_exporter_path)}",
-			"${file(var.consul_client_path)}"]
+		inline = ["${file(var.user_data_dummy_exporter_path)}"
+			]
 	}
 }
 
@@ -212,10 +214,12 @@ resource "aws_instance" "consul_server_dummy" {
 	
 	tags = {
 	Name = "Terraform_Consul_Server"
-  }
-
+	}
+	
+	user_data = "${file(var.consul_server_path)}"
+  
 	provisioner "remote-exec" {
-		inline = ["${file(var.consul_server_path)}"]
+		inline = []
 	}
 }
 
