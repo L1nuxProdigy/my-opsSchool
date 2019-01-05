@@ -14,6 +14,7 @@ variable "key_name" {
 variable "user_data_dummy_exporter_path" {}
 variable "consul_client_path" {}
 variable "consul_server_path" {}
+variable "my_consul_server_path" {}
 
 
 
@@ -90,7 +91,20 @@ resource "aws_security_group" "SecurityGroup_main" {
 		to_port     = 22
 		protocol    = "TCP"
 		cidr_blocks = ["0.0.0.0/0"]
-      }
+	}
+	ingress {
+		from_port   = 4646
+		to_port     = 4646
+		protocol    = "TCP"
+		cidr_blocks = ["0.0.0.0/0"]
+	}
+	ingress {
+		from_port   = 8500
+		to_port     = 8500
+		protocol    = "TCP"
+		cidr_blocks = ["0.0.0.0/0"]
+	}
+	
 	egress {
 		from_port       = 0
 		to_port         = 0
@@ -108,7 +122,7 @@ resource "aws_security_group" "SecurityGroup_main" {
 # EC2 Resources
 ##################################################################################
 
-resource "aws_instance" "consul_client_dummy" {
+resource "aws_instance" "dummy_exporter1" {
 	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
@@ -121,17 +135,15 @@ resource "aws_instance" "consul_client_dummy" {
 	}
 	
 	tags = {
-	Name = "Terraform_Consul_Client"
+	Name = "Terraform_Dummy_exporter"
   }
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.user_data_dummy_exporter_path)}",
-			"${file(var.consul_client_path)}"
-			]
+		inline = ["${file(var.user_data_dummy_exporter_path)}"]
 	}
 }
 
-resource "aws_instance" "consul_server_dummy" {
+resource "aws_instance" "consul_server" {
 	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
@@ -146,11 +158,11 @@ resource "aws_instance" "consul_server_dummy" {
 	tags = {
 	Name = "Terraform_Consul_Server"
   }
+  
+  user_data = "${file(var.my_consul_server_path)}"
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.user_data_dummy_exporter_path)}",
-			"${file(var.consul_server_path)}"
-			]
+		inline = []
 	}
 }
 
@@ -159,5 +171,5 @@ resource "aws_instance" "consul_server_dummy" {
 ##################################################################################
 
 output "aws_instance_public_dns" {
-	value = "${aws_instance.consul_client_dummy.public_dns}"
+	value = "${aws_instance.dummy_exporter1.public_dns}"
 }

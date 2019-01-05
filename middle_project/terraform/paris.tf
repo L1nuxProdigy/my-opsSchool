@@ -12,10 +12,7 @@ variable "key_name" {
 
 ### Machines Configurations Scripts ###
 variable "user_data_dummy_exporter_path" {}
-variable "consul_client_path" {}
 variable "consul_server_path" {}
-variable "my_consul_server_path" {}
-
 
 
 ##################################################################################
@@ -26,6 +23,55 @@ provider "aws" {
   access_key = "${var.aws_access_key}"
   secret_key = "${var.aws_secret_key}"
   region     = "eu-west-3"
+}
+
+##################################################################################
+# IAM Resources
+##################################################################################
+resource "aws_iam_instance_profile" "Consul_IAM_Profile" {
+  name  = "Consul_Profile"
+  role = "${aws_iam_role.Consul_IAM_Role.name}"
+}
+
+resource "aws_iam_role_policy" "Consul_IAM_Policy" {
+  name = "Consul-Describe-Policy"
+  role = "${aws_iam_role.Consul_IAM_Role.id}"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "ec2:DescribeInstances"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role" "Consul_IAM_Role" {
+  name = "Consul-Role"
+  description = "Created By Terraform"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
 }
 
 ##################################################################################
@@ -91,10 +137,22 @@ resource "aws_security_group" "SecurityGroup_main" {
 		to_port     = 22
 		protocol    = "TCP"
 		cidr_blocks = ["0.0.0.0/0"]
+      }
+	ingress {
+		from_port   = 65433
+		to_port     = 65433
+		protocol    = "TCP"
+		cidr_blocks = ["0.0.0.0/0"]
+      }
+	ingress {
+		from_port   = 8300
+		to_port     = 8300
+		protocol    = "TCP"
+		cidr_blocks = ["0.0.0.0/0"]
 	}
 	ingress {
-		from_port   = 4646
-		to_port     = 4646
+		from_port   = 8301
+		to_port     = 8301
 		protocol    = "TCP"
 		cidr_blocks = ["0.0.0.0/0"]
 	}
@@ -104,7 +162,7 @@ resource "aws_security_group" "SecurityGroup_main" {
 		protocol    = "TCP"
 		cidr_blocks = ["0.0.0.0/0"]
 	}
-	
+	  
 	egress {
 		from_port       = 0
 		to_port         = 0
@@ -122,12 +180,13 @@ resource "aws_security_group" "SecurityGroup_main" {
 # EC2 Resources
 ##################################################################################
 
-resource "aws_instance" "dummy_exporter1" {
+resource "aws_instance" "App_with_Consul_client-1" {
 	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
+	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
 
 	connection {
 		user        = "ubuntu"
@@ -135,12 +194,34 @@ resource "aws_instance" "dummy_exporter1" {
 	}
 	
 	tags = {
-	Name = "Terraform_Dummy_exporter"
-  }
+	Name = "Terraform_App-1"
+	}
+	
+	user_data = "${file(var.user_data_dummy_exporter_path)}"
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.user_data_dummy_exporter_path)}"]
+		inline = []
 	}
+}
+
+resource "aws_instance" "App_with_Consul_client-2" {
+	ami           = "ami-08182c55a1c188dee"
+	instance_type = "t2.micro"
+	key_name        = "${var.key_name}"
+	subnet_id = "${aws_subnet.Subnet_main.id}"
+	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
+	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
+
+	connection {
+		user        = "ubuntu"
+		private_key = "${file(var.private_key_path)}"
+	}
+	
+	tags = {
+	Name = "Terraform_App-2"
+	}
+	
+	user_data = "${file(var.user_data_dummy_exporter_path)}"
 }
 
 resource "aws_instance" "consul_server" {
@@ -157,10 +238,10 @@ resource "aws_instance" "consul_server" {
 	
 	tags = {
 	Name = "Terraform_Consul_Server"
-  }
-  
-  user_data = "${file(var.my_consul_server_path)}"
-
+	}
+	
+	user_data = "${file(var.consul_server_path)}"
+	
 	provisioner "remote-exec" {
 		inline = []
 	}
@@ -171,5 +252,5 @@ resource "aws_instance" "consul_server" {
 ##################################################################################
 
 output "aws_instance_public_dns" {
-	value = "${aws_instance.dummy_exporter1.public_dns}"
+	value = "${aws_instance.App_with_Consul_client-1.public_dns}"
 }
