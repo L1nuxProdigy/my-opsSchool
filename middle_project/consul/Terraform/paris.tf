@@ -14,6 +14,7 @@ variable "key_name" {
 variable "user_data_dummy_exporter_path" {}
 variable "consul_client_path" {}
 variable "consul_server_path" {}
+variable "consul_clean_path" {}
 
 
 
@@ -125,7 +126,7 @@ resource "aws_instance" "consul_client_dummy" {
   }
 
 	provisioner "remote-exec" {
-		inline = []
+		inline = ["${file(var.consul_clean_path)}"]
 	}
 }
 
@@ -146,7 +147,7 @@ resource "aws_instance" "consul_server_dummy" {
   }
 
 	provisioner "remote-exec" {
-		inline = []
+		inline = ["${file(var.consul_clean_path)}"]
 	}
 }
 

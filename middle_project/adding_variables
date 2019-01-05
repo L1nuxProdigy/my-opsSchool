@@ -9,3 +9,4 @@ echo 'consul_server_path = "/home/ubuntu/my-opsSchool/middle_project/consul/andr
 
 # my consul tryouts
 echo 'my_consul_server_path = "/home/ubuntu/my-opsSchool/middle_project/consul/consul_install_server_dev_mode"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+echo 'consul_clean_path = "/home/ubuntu/my-opsSchool/middle_project/consul/consul_install_clean"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
