@@ -221,10 +221,9 @@ resource "aws_instance" "consul_server_dummy" {
 	Name = "Terraform_Consul_Server"
 	}
 	
-	user_data = "${file(var.consul_server_path)}"
   
 	provisioner "remote-exec" {
-		inline = []
+		inline = ["${file(var.consul_server_path)}"]
 	}
 }
 
