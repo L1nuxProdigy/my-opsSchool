@@ -198,10 +198,10 @@ resource "aws_instance" "consul_client_dummy" {
 	Name = "Terraform_Consul_Client"
 	}
 	
-	user_data = "${file(var.consul_client_path)}"
+	user_data = ""
 
 	provisioner "remote-exec" {
-		inline = ["${file(var.user_data_dummy_exporter_path)}"
+		inline = ["${file(var.consul_client_path)}","${file(var.user_data_dummy_exporter_path)}"
 			]
 	}
 }
