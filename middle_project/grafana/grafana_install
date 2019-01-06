@@ -1,25 +1,5 @@
 #!/bin/bash
 
-## install grafana
-wget https://dl.grafana.com/oss/release/grafana_5.4.2_amd64.deb
-sudo apt-get install -y adduser libfontconfig
-sudo dpkg -i grafana_5.4.2_amd64.deb
-
-# setting datasource
-echo "apiVersion: 1
-
-datasources:
-  - name: Prometheus
-    type: prometheus
-    access: proxy
-    url: http://server.node.consul:9090
-" > /etc/grafana/provisioning/datasources/prometheus.yml
-
-# sudo service grafana-server start
-
-sudo systemctl daemon-reload
-sudo systemctl start grafana-server
-
 ### Consul Stuff ###
 # Downloading and installing Prerequisites
 sudo apt install unzip -y
@@ -66,3 +46,31 @@ EOCSU
 
 systemctl daemon-reload
 systemctl start consul &
+
+## install grafana
+wget https://dl.grafana.com/oss/release/grafana_5.4.2_amd64.deb
+sudo apt-get install -y adduser libfontconfig
+sudo dpkg -i grafana_5.4.2_amd64.deb
+
+# setting datasource
+echo "apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+" > /etc/grafana/provisioning/datasources/prometheus.yml
+
+# sudo service grafana-server start
+
+sudo systemctl daemon-reload
+sudo systemctl start grafana-server
+
+x=$(dig @127.0.0.1 -p 8600 consul_server.node.consul +noall +answer | tail -n1)
+x2=${x# }
+x3=$(echo $x2 | cut -d ' ' -f5)
+echo "$x3 prometheus" >> /etc/hosts
+echo $x3 > /home/ubuntu/x3
+
+
