@@ -12,7 +12,7 @@ datasources:
   - name: Prometheus
     type: prometheus
     access: proxy
-    url: 
+    url: http://server.node.consul:9090
 " > /etc/grafana/provisioning/datasources/prometheus.yml
 
 # sudo service grafana-server start
