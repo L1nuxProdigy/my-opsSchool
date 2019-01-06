@@ -1,15 +1,24 @@
 #!/bin/bash
-echo "grafana" > /etc/hostname
+
 ## install grafana
 wget https://dl.grafana.com/oss/release/grafana_5.4.2_amd64.deb
 sudo apt-get install -y adduser libfontconfig
 sudo dpkg -i grafana_5.4.2_amd64.deb
 
+# setting datasource
+echo "apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://localhost:9090
+" > /etc/grafana/provisioning/datasources/prometheus.yml
+
 # sudo service grafana-server start
 
 sudo systemctl daemon-reload
 sudo systemctl start grafana-server
-sudo systemctl status grafana-server
 
 ### Consul Stuff ###
 # Downloading and installing Prerequisites
