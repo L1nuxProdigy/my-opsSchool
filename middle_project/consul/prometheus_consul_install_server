@@ -41,7 +41,7 @@ datacenter = "dc1"
 enable_syslog = true
 log_level = "DEBUG"
 recursors =  ["127.0.0.1"]
-retry_join = ["provider=aws tag_key=Name tag_value=Terraform_Consul_Server"]
+retry_join = ["provider=aws tag_key=Name tag_value=Consul_Prometheus_by_Terraform"]
 server = true
 ui = true
 EOCCF
