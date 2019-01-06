@@ -12,8 +12,8 @@ variable "key_name" {
 
 ### Machines Configurations Scripts ###
 variable "user_data_dummy_exporter_path" {}
-variable "consul_server_path" {}
 variable "prometheus_consul_server_path" {}
+variable "grafana_path" {}
 
 
 
@@ -139,6 +139,7 @@ resource "aws_security_group" "SecurityGroup_main" {
 		to_port     = 22
 		protocol    = "TCP"
 		cidr_blocks = ["0.0.0.0/0"]
+		description = "SSH"
       }
 	ingress {
 		from_port   = 65433
@@ -195,21 +196,12 @@ resource "aws_instance" "App_with_Consul_client-1" {
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
 	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
-
-	connection {
-		user        = "ubuntu"
-		private_key = "${file(var.private_key_path)}"
-	}
 	
 	tags = {
-	Name = "Terraform_App-1"
+	Name = "APP1_by_Terraform"
 	}
 	
 	user_data = "${file(var.user_data_dummy_exporter_path)}"
-
-	provisioner "remote-exec" {
-		inline = []
-	}
 }
 
 resource "aws_instance" "App_with_Consul_client-2" {
@@ -226,7 +218,7 @@ resource "aws_instance" "App_with_Consul_client-2" {
 	}
 	
 	tags = {
-	Name = "Terraform_App-2"
+	Name = "APP2_by_Terraform"
 	}
 	
 	user_data = "${file(var.user_data_dummy_exporter_path)}"
@@ -245,10 +237,33 @@ resource "aws_instance" "prometheus_consul_server" {
 	}
 	
 	tags = {
-	Name = "Terraform_Consul_Server"
+	Name = "Consul_Prometheus_by_Terraform"
 	}
 	
 	user_data = "${file(var.prometheus_consul_server_path)}"
+	
+	provisioner "remote-exec" {
+		inline = []
+	}
+}
+
+resource "aws_instance" "grafana" {
+	ami           = "ami-08182c55a1c188dee"
+	instance_type = "t2.micro"
+	key_name        = "${var.key_name}"
+	subnet_id = "${aws_subnet.Subnet_main.id}"
+	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
+
+	connection {
+		user        = "ubuntu"
+		private_key = "${file(var.private_key_path)}"
+	}
+	
+	tags = {
+	Name = "Grafana_by_Terraform"
+	}
+	
+	user_data = "${file(var.grafana_path)}"
 	
 	provisioner "remote-exec" {
 		inline = []

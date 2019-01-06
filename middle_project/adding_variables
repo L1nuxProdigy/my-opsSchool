@@ -7,3 +7,4 @@ echo 'user_data_dummy_exporter_path = "/home/ubuntu/my-opsSchool/middle_project/
 echo 'consul_client_path = "/home/ubuntu/my-opsSchool/middle_project/consul/consul_install_client"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
 echo 'consul_server_path = "/home/ubuntu/my-opsSchool/middle_project/consul/consul_install_server"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
 echo 'prometheus_consul_server_path = "/home/ubuntu/my-opsSchool/middle_project/consul/prometheus_consul_install_server"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+echo 'grafana_path = "/home/ubuntu/my-opsSchool/middle_project/grafana/grafana_install"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
