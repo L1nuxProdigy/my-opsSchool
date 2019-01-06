@@ -265,6 +265,7 @@ resource "aws_instance" "grafana" {
 	key_name        = "${var.key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
+	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
 
 	connection {
 		user        = "ubuntu"
