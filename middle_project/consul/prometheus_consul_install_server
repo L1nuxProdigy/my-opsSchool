@@ -33,6 +33,7 @@ LOCAL_IPV4=$(curl "http://169.254.169.254/latest/meta-data/local-ipv4")
 
 
 cat << EOCCF >/etc/consul.d/server.hcl
+node_name = "consul_server"
 advertise_addr = "${LOCAL_IPV4}"
 bootstrap_expect = 1
 client_addr =  "0.0.0.0"
