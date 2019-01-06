@@ -47,7 +47,7 @@ datacenter = "dc1"
 data_dir = "/var/lib/consul"
 enable_syslog = true
 log_level = "DEBUG"
-retry_join = ["provider=aws tag_key=Name tag_value=Terraform_Consul_Server"]
+retry_join = ["provider=aws tag_key=Name tag_value=Consul_Prometheus_by_Terraform"]
 advertise_addr = "${LOCAL_IPV4}"
 EOCCF
 

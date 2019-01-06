@@ -146,30 +146,35 @@ resource "aws_security_group" "SecurityGroup_main" {
 		to_port     = 65433
 		protocol    = "TCP"
 		cidr_blocks = ["0.0.0.0/0"]
+		description = "Dummy Exporter APP"
       }
 	ingress {
 		from_port   = 9090
 		to_port     = 9090
 		protocol    = "TCP"
 		cidr_blocks = ["0.0.0.0/0"]
+		description = "Prometheus"
       }
 	ingress {
 		from_port   = 8300
 		to_port     = 8300
 		protocol    = "TCP"
 		cidr_blocks = ["0.0.0.0/0"]
+		description = "Consul"
 	}
 	ingress {
 		from_port   = 8301
 		to_port     = 8301
 		protocol    = "TCP"
 		cidr_blocks = ["0.0.0.0/0"]
+		description = "Consul"
 	}
 	ingress {
 		from_port   = 8500
 		to_port     = 8500
 		protocol    = "TCP"
 		cidr_blocks = ["0.0.0.0/0"]
+		description = "Consul Web"
 	}
 	  
 	egress {
