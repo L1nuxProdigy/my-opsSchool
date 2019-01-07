@@ -218,7 +218,7 @@ resource "aws_instance" "grafana" {
 	
 	
 	
-	user_data = "${data.template_file.grafana_with_config.rendered)}"
+	user_data = "${data.template_file.grafana_with_config.rendered}"
 	
 	provisioner "remote-exec" {
 		inline = []
