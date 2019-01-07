@@ -53,13 +53,14 @@ sudo apt-get install -y adduser libfontconfig
 sudo dpkg -i grafana_5.4.2_amd64.deb
 
 while [[ $(consul members | head -n3 | wc -l | bc) < 3 ]]; do
-        echo "sleep"
-        sleep 2
+        echo "sleep" >> /home/ubuntu/sleepfile.txt
+        sleep 4
 done
 
 x=$(dig @127.0.0.1 -p 8600 consul_server.node.consul +noall +answer | tail -n1)
 x2=${x# }
 x3=$(echo $x2 | cut -d ' ' -f5)
+echo "sleep" >> /home/ubuntu/xfile.txt
 
 # setting datasource
 echo "apiVersion: 1
