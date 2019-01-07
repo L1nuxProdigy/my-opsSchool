@@ -201,7 +201,7 @@ resource "aws_security_group" "SecurityGroup_main" {
 data "template_file" "grafana_with_config" {
 	template = "${file("${path.module}/home/ubuntu/my-opsSchool/middle_project/grafana/grafana_install.tpl")}"
 	vars {
-	prometheus_consul_private_ip = "${aws_instance.grafana.private_ip}"
+	prometheus_consul_private_ip = "${aws_instance.App_with_Consul_client-1.private_ip}"
 	}
 }
 
@@ -233,6 +233,21 @@ resource "aws_instance" "grafana" {
 	provisioner "remote-exec" {
 		inline = []
 	}
+}
+
+resource "aws_instance" "App_with_Consul_client-1" {
+	ami           = "ami-08182c55a1c188dee"
+	instance_type = "t2.micro"
+	key_name        = "${var.key_name}"
+	subnet_id = "${aws_subnet.Subnet_main.id}"
+	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
+	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
+	
+	tags = {
+	Name = "APP1_by_Terraform"
+	}
+	
+	user_data = "${file(var.user_data_dummy_exporter_path)}"
 }
 
 
