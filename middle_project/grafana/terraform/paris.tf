@@ -229,7 +229,7 @@ resource "aws_instance" "grafana" {
 	user_data = "${file(var.grafana_path)}"
 	
 	provisioner "file" {
-	content     = "${data.template_file.prometheus_datasource.rendered}"
+	content     = "${data.template_file.grafana_with_config.rendered}"
 	destination = "/etc/grafana/datasources/prometheus_datasource.yaml"
 	}
 	
