@@ -199,7 +199,7 @@ resource "aws_security_group" "SecurityGroup_main" {
 ##################################################################################
 
 data "template_file" "grafana_with_config" {
-	template = "${file("/home/ubuntu/my-opsSchool/middle_project/grafana/grafana_install.tpl")}"
+	template = "${file("/home/ubuntu/my-opsSchool/middle_project/grafana/datasources.tpl")}"
 	vars {
 	prometheus_consul_private_ip = "${aws_instance.App_with_Consul_client-1.private_ip}"
 	}
@@ -226,9 +226,12 @@ resource "aws_instance" "grafana" {
 	Name = "Grafana_by_Terraform"
 	}
 	
+	user_data = "${file(var.grafana_path)}"
 	
-	
-	user_data = "${data.template_file.grafana_with_config.rendered}"
+	provisioner "file" {
+	content     = "${data.template_file.prometheus_datasource.rendered}"
+	destination = "/etc/grafana/datasources/prometheus_datasource.yaml"
+	}
 	
 	provisioner "remote-exec" {
 		inline = []
