@@ -194,6 +194,16 @@ resource "aws_security_group" "SecurityGroup_main" {
     Name = "Terraform_SG"
   }
 }
+##################################################################################
+# Data
+##################################################################################
+
+data "template_file" "grafana_with_config" {
+	template = "${file("${path.module}/home/ubuntu/my-opsSchool/middle_project/grafana/grafana_install.tpl")}"
+	vars {
+	prometheus_consul_private_ip = "${aws_instance.grafana.private_ip}"
+	}
+}
 
 ##################################################################################
 # EC2 Resources
@@ -225,13 +235,4 @@ resource "aws_instance" "grafana" {
 	}
 }
 
-##################################################################################
-# Data
-##################################################################################
 
-data "template_file" "grafana_with_config" {
-	template = "${file("${path.module}/home/ubuntu/my-opsSchool/middle_project/grafana/grafana_install.tpl")}"
-	vars {
-	prometheus_consul_private_ip = "${aws_instance.grafana.private_ip}"
-	}
-}
