@@ -218,9 +218,20 @@ resource "aws_instance" "grafana" {
 	
 	
 	
-	user_data = "${file(var.grafana_path)}"
+	user_data = "${data.template_file.grafana_with_config.rendered)}"
 	
 	provisioner "remote-exec" {
 		inline = []
+	}
+}
+
+##################################################################################
+# Data
+##################################################################################
+
+data "template_file" "grafana_with_config" {
+	template = "${file("${path.module}/home/ubuntu/my-opsSchool/middle_project/grafana/grafana_install.tpl")}"
+	vars {
+	prometheus_consul_private_ip = "${aws_instance.grafana.private_ip}"
 	}
 }
