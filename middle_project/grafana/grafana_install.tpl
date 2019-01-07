@@ -60,13 +60,11 @@ datasources:
     type: prometheus
     access: proxy
     url: ${prometheus_consul_private_ip}:9090
-" > /etc/grafana/provisioning/datasources/prometheus.yml
+" > /etc/grafana/provisioning/datasources/prometheus2.yml
 
 # sudo service grafana-server start
 
 sudo systemctl daemon-reload
 sudo systemctl start grafana-server
-
-echo "${prometheus_consul_private_ip}" > /home/ubuntu/checking_terra_vars
 
 

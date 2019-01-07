@@ -15,15 +15,6 @@ variable "user_data_dummy_exporter_path" {}
 variable "prometheus_consul_server_path" {}
 variable "grafana_path" {}
 
-data "template_file" "grafana_template" {
-  template = "${file(var.grafana_path)}"
-
-  vars {
-    prometheus_consul_private_ip = "${aws_instance.prometheus_consul_server.private_ip}"
-  }
-}
-
-
 
 ##################################################################################
 # PROVIDERS
