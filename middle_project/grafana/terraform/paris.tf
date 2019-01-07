@@ -230,7 +230,7 @@ resource "aws_instance" "grafana" {
 	
 	provisioner "file" {
 	content     = "${data.template_file.grafana_with_config.rendered}"
-	destination = "/etc/grafana/datasources/prometheus_datasource.yaml"
+	destination = "/etc/grafana/provisioning/dashboards/prometheus_datasource.yaml"
 	}
 	
 	provisioner "remote-exec" {
