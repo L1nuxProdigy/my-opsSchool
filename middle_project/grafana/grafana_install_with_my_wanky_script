@@ -67,6 +67,10 @@ datasources:
 sudo systemctl daemon-reload
 sudo systemctl start grafana-server
 
-echo "${prometheus_consul_private_ip}" > /home/ubuntu/checking_terra_vars
+x=$(dig @127.0.0.1 -p 8600 consul_server.node.consul +noall +answer | tail -n1)
+x2=${x# }
+x3=$(echo $x2 | cut -d ' ' -f5)
+echo "$x3 prometheus" >> /etc/hosts
+echo $x3 > /home/ubuntu/x3
 
 
