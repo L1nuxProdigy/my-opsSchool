@@ -1,0 +1,3 @@
+---
+- name: install epel repo
+  yum: name={{ epel_yum_repo }} state=present
