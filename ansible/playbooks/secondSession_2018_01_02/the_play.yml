@@ -1,6 +1,6 @@
 ---
 - hosts: nodes
   vars_files:
-    - ./variables
+    - ./variables.yml
   roles:
     - common
