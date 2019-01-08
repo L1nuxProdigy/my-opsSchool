@@ -1,0 +1,3 @@
+---
+epel_yum_repo: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+user_default_password: $6$lgHXgOwR3/FfhfKs$Q3AqP63HxHmhE4aYu5otGSpjXpNsoYeXJhRYkrqNzYXPyY0Kmfk3oEzXUuvCdKxC1Btb9hCP/a3loKUUnZFzu/
