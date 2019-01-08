@@ -1,4 +1,5 @@
 ---
 - hosts: nodes
+  vars_files: ['credentials.yml','variables.yml']
   roles:
     - common
