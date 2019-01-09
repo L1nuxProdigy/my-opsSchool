@@ -1,0 +1,3 @@
+---
+- name: create opsschool user
+  user: name=opsschool password={{ user_default_password }}

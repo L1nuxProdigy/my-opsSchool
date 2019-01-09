@@ -1,0 +1,28 @@
+---
+- name: install httpd, replace html, add line to hosts file
+  hosts: webserver
+  remote_user: ec2-user
+  become: yes
+  vars_files: ['credentials.yml']
+  
+  tasks: 
+  - name: install httpd
+    yum: name=httpd state=present
+    
+  - name: add html
+    template: src=/home/ec2-user/my-opsSchool/ansible/playbooks/firstSession_2018_12_26/index_template dest=/var/www/html/index 
+  
+  - name: add text to /etc/hosts
+    lineinfile:
+      path: /etc/hosts
+      line: '172.31.37.253 node1.opsschool.com'
+      
+  - name: start httpd service
+    service: name=httpd state=started
+ 
+  - name: Check that you can connect (GET) to a page and it returns a status 200
+    uri:
+      url: http://localhost/index
+    
+    
+  
