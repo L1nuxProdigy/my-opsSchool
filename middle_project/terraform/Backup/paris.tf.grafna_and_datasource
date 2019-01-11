@@ -14,9 +14,6 @@ variable "key_name" {
 variable "user_data_dummy_exporter_path" {}
 variable "prometheus_consul_server_path" {}
 variable "grafana_path" {}
-variable "logstash_path" {}
-
-
 
 
 ##################################################################################
@@ -279,30 +276,6 @@ resource "aws_instance" "grafana" {
 	}
 	
 	user_data = "${file(var.grafana_path)}"
-	
-	provisioner "remote-exec" {
-		inline = []
-	}
-}
-
-resource "aws_instance" "logstash" {
-	ami           = "ami-08182c55a1c188dee"
-	instance_type = "t2.micro"
-	key_name        = "${var.key_name}"
-	subnet_id = "${aws_subnet.Subnet_main.id}"
-	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
-	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
-
-	connection {
-		user        = "ubuntu"
-		private_key = "${file(var.private_key_path)}"
-	}
-	
-	tags = {
-	Name = "Logstash_by_Terraform"
-	}
-	
-	user_data = "${file(var.logstash_path)}"
 	
 	provisioner "remote-exec" {
 		inline = []
