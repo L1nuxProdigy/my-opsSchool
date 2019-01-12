@@ -320,7 +320,7 @@ resource "aws_instance" "elasticsearch" {
 	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
 
 	tags = {
-	Name = "Logstash_by_Terraform"
+	Name = "ElasticSearch_by_Terraform"
 	}
 	
 	user_data = "${file(var.elasticsearch_path)}"
