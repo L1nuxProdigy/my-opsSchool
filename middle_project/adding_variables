@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # dummy exporter
-echo 'user_data_dummy_exporter_path = "/home/ubuntu/my-opsSchool/middle_project/containers/dummy_exporter_container"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+echo 'user_data_dummy_exporter_path1 = "/home/ubuntu/my-opsSchool/middle_project/containers/dummy_exporter_container1"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
+echo 'user_data_dummy_exporter_path2 = "/home/ubuntu/my-opsSchool/middle_project/containers/dummy_exporter_container2"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables
 
 # consul
 echo 'consul_client_path = "/home/ubuntu/my-opsSchool/middle_project/consul/consul_install_client"' >> /home/ubuntu/my-opsSchool/middle_project/terraform/variables

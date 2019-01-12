@@ -11,7 +11,8 @@ variable "key_name" {
 }
 
 ### Machines Configurations Scripts ###
-variable "user_data_dummy_exporter_path" {}
+variable "user_data_dummy_exporter_path1" {}
+variable "user_data_dummy_exporter_path2" {}
 variable "prometheus_consul_server_path" {}
 variable "grafana_path" {}
 variable "logstash_path" {}
@@ -215,7 +216,7 @@ resource "aws_instance" "App_with_Consul_client-1" {
 	Name = "APP1_by_Terraform"
 	}
 	
-	user_data = "${file(var.user_data_dummy_exporter_path)}"
+	user_data = "${file(var.user_data_dummy_exporter_path1)}"
 }
 
 resource "aws_instance" "App_with_Consul_client-2" {
@@ -235,7 +236,7 @@ resource "aws_instance" "App_with_Consul_client-2" {
 	Name = "APP2_by_Terraform"
 	}
 	
-	user_data = "${file(var.user_data_dummy_exporter_path)}"
+	user_data = "${file(var.user_data_dummy_exporter_path2)}"
 }
 
 resource "aws_instance" "prometheus_consul_server" {
