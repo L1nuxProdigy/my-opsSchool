@@ -62,8 +62,11 @@ cd /home/ubuntu/elasticsearch-6.5.4/
 sudo sed -i 's/Xms1g/Xms256m/g' /home/ubuntu/elasticsearch-6.5.4/config/jvm.options
 sudo sed -i 's/Xmx1g/Xmx512m/g' /home/ubuntu/elasticsearch-6.5.4/config/jvm.options
 
+chown -R ubuntu /home/ubuntu/elasticsearch-6.5.4
+cd /home/ubuntu/elasticsearch-6.5.4
+
 ## running elasticsearch
-/home/ubuntu/elasticsearch-6.5.4/bin/elasticsearch -d
+./bin/elasticsearch -d
 
 # setting an interactive shell variable named x3 as a local ip for a consul node
 x=$(dig @127.0.0.1 -p 8600 app1.node.consul +noall +answer | tail -n1)
@@ -72,7 +75,7 @@ x3=$(echo $x2 | cut -d ' ' -f5)
 
 ## finding the consul_prometheus_server private ip
 while [[ ${#x3} = 0 ]]; do
-        sleep 4
+        sleep 15
 		x=$(dig @127.0.0.1 -p 8600 nonode.node.consul +noall +answer | tail -n1)
 		x2=${x# }
 		x3=$(echo $x2 | cut -d ' ' -f5)
