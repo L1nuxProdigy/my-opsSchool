@@ -63,7 +63,7 @@ sudo apt-get update && sudo apt-get install elasticsearch
 ## setting heapsize
 sudo sed -i 's/Xms1g/Xms256m/g' /etc/elasticsearch/jvm.options
 sudo sed -i 's/Xmx1g/Xmx256m/g' /etc/elasticsearch/jvm.options
-echo "network.host: ${LOCAL_IPV4} >> /etc/elasticsearch/jvm.options
+echo "network.host: ${LOCAL_IPV4}" >> /etc/elasticsearch/elasticsearch.yml
 
 ## running elasticsearch
 #sudo -su ubuntu /home/ubuntu/elasticsearch-6.5.4/bin/elasticsearch -d
