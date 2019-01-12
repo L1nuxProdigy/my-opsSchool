@@ -73,3 +73,7 @@ systemctl start consul &
 
 
 sudo echo '{"service": {"name": "dummy_exporter", "tags": ["dummy"], "port": 65433}}' > /etc/consul.d/dummy_exporter.json
+
+# install file-beat
+sudo curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.5.4-amd64.deb
+sudo dpkg -i filebeat-6.5.4-amd64.deb
