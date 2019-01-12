@@ -59,8 +59,8 @@ unzip elasticsearch-6.5.4.zip
 cd /home/ubuntu/elasticsearch-6.5.4/
 
 ## setting heapsize
-sed -i 's/Xms1g/Xms256m/g' /home/ubuntu/elasticsearch-6.5.4/config/jvm.options
-sed -i 's/Xmx1g/Xmx512m/g' /home/ubuntu/elasticsearch-6.5.4/config/jvm.options
+sudo sed -i 's/Xms1g/Xms256m/g' /home/ubuntu/elasticsearch-6.5.4/config/jvm.options
+sudo sed -i 's/Xmx1g/Xmx512m/g' /home/ubuntu/elasticsearch-6.5.4/config/jvm.options
 
 ## running elasticsearch
 /home/ubuntu/elasticsearch-6.5.4/bin/elasticsearch -d
