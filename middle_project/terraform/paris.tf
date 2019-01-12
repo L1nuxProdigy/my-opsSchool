@@ -168,6 +168,13 @@ resource "aws_security_group" "SecurityGroup_main" {
 		description = "Grafana"
       }
 	ingress {
+		from_port   = 9200
+		to_port     = 9200
+		protocol    = "TCP"
+		cidr_blocks = ["0.0.0.0/0"]
+		description = "ElasticSearch"
+      }
+	ingress {
 		from_port   = 9090
 		to_port     = 9090
 		protocol    = "TCP"
