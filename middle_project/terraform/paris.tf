@@ -154,6 +154,13 @@ resource "aws_security_group" "SecurityGroup_main" {
 		description = "Dummy Exporter APP"
       }
 	ingress {
+		from_port   = 5601
+		to_port     = 5601
+		protocol    = "TCP"
+		cidr_blocks = ["0.0.0.0/0"]
+		description = "Kibana"
+      }
+	ingress {
 		from_port   = 3000
 		to_port     = 3000
 		protocol    = "TCP"
