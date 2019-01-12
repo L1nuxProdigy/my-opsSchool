@@ -56,7 +56,6 @@ sudo apt-get install openjdk-8-jdk-headless -y
 cd /home/ubuntu/
 wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.5.4.zip
 unzip elasticsearch-6.5.4.zip
-cd /home/ubuntu/elasticsearch-6.5.4/
 
 ## setting heapsize
 sudo sed -i 's/Xms1g/Xms512m/g' /home/ubuntu/elasticsearch-6.5.4/config/jvm.options
