@@ -53,7 +53,17 @@ sudo apt-get update -y
 sudo apt-get install openjdk-8-jdk-headless -y
 
 ## elasticsearch install
+cd /home/ubuntu/
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.5.4.zip
+unzip elasticsearch-6.5.4.zip
+cd /home/ubuntu/elasticsearch-6.5.4/
 
+## setting heapsize
+sed -i 's/Xms1g/Xms256m/g' /home/ubuntu/elasticsearch-6.5.4/config/jvm.options
+sed -i 's/Xmx1g/Xmx512m/g' /home/ubuntu/elasticsearch-6.5.4/config/jvm.options
+
+## running elasticsearch
+/home/ubuntu/elasticsearch-6.5.4/bin/elasticsearch -d
 
 # setting an interactive shell variable named x3 as a local ip for a consul node
 x=$(dig @127.0.0.1 -p 8600 app1.node.consul +noall +answer | tail -n1)
