@@ -53,9 +53,8 @@ sudo apt-get update -y
 sudo apt-get install openjdk-8-jdk-headless -y
 
 ## kibana install
-cd /home/ubuntu/
-wget https://artifacts.elastic.co/downloads/kibana/kibana-6.5.4-linux-x86_64.tar.gz
-tar -xzf kibana-6.5.4-linux-x86_64.tar.gz
+wget https://artifacts.elastic.co/downloads/kibana/kibana-6.5.4-amd64.deb
+dpkg -i kibana-6.5.4-amd64.deb
 
 # setting an interactive shell variable named x3 as a local ip for a consul node
 x=$(dig @127.0.0.1 -p 8600 elasticsearch.node.consul +noall +answer | tail -n1)
@@ -71,5 +70,5 @@ while [[ ${#x3} = 0 ]]; do
 done
 
 ## kibana configuration
-echo 'elasticsearch.url: "http://'${x3}':9200"' >> /home/ubuntu/kibana-6.5.4-linux-x86_64/config/kibana.yml
+echo 'elasticsearch.url: "http://'${x3}':9200"' >> /etc/kibana/kibana.yml
 
