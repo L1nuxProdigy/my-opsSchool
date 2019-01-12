@@ -50,7 +50,8 @@ systemctl start consul &
 ## logstash prerequisites- JAVA
 sudo add-apt-repository ppa:openjdk-r/ppa -y
 sudo apt-get update -y
-sudo apt-get install openjdk-8-jdk -y
+#sudo apt-get install openjdk-8-jdk-headless -y
+#sudo java -Xms256m -Xmx512m
 
 ## logstash install
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
@@ -60,12 +61,16 @@ sudo apt-get update -y
 # sudo apt-get install logstash -y
 
 
-
-## finding the consul_prometheus_server private ip
-while [[ $(consul members | head -n3 | wc -l | bc) < 3 ]]; do
-        sleep 4
-done
-
-x=$(dig @127.0.0.1 -p 8600 consul_server.node.consul +noall +answer | tail -n1)
+# setting an interactive shell variable named x3 as a local ip for a consul node
+x=$(dig @127.0.0.1 -p 8600 app1.node.consul +noall +answer | tail -n1)
 x2=${x# }
 x3=$(echo $x2 | cut -d ' ' -f5)
+
+## finding the consul_prometheus_server private ip
+while [[ ${#x3} = 0 ]]; do
+        sleep 4
+		x=$(dig @127.0.0.1 -p 8600 nonode.node.consul +noall +answer | tail -n1)
+		x2=${x# }
+		x3=$(echo $x2 | cut -d ' ' -f5)
+done
+
