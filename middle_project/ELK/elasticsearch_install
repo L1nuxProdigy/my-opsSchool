@@ -61,11 +61,15 @@ sudo apt-get update && sudo apt-get install elasticsearch
 
 
 ## setting heapsize
-sudo sed -i 's/Xms1g/Xms256m/g' /home/ubuntu/elasticsearch-6.5.4/config/jvm.options
-sudo sed -i 's/Xmx1g/Xmx256m/g' /home/ubuntu/elasticsearch-6.5.4/config/jvm.options
+sudo sed -i 's/Xms1g/Xms256m/g' /etc/elasticsearch/jvm.options
+sudo sed -i 's/Xmx1g/Xmx256m/g' /etc/elasticsearch/jvm.options
 
 ## running elasticsearch
-sudo -su ubuntu /home/ubuntu/elasticsearch-6.5.4/bin/elasticsearch -d
+#sudo -su ubuntu /home/ubuntu/elasticsearch-6.5.4/bin/elasticsearch -d
+#sudo systemctl -w vm.max_map_count=262144
+systemctl enable elasticsearch
+systemctl start elasticsearch
+
 
 # setting an interactive shell variable named x3 as a local ip for a consul node
 x=$(dig @127.0.0.1 -p 8600 app1.node.consul +noall +answer | tail -n1)
