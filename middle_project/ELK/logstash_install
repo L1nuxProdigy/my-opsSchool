@@ -47,7 +47,18 @@ EOCSU
 systemctl daemon-reload
 systemctl start consul &
 
+## logstash prerequisites- JAVA
+sudo add-apt-repository ppa:openjdk-r/ppa -y
+sudo apt-get update -y
+sudo apt-get install openjdk-8-jdk -y
+
 ## logstash install
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+sudo apt-get install apt-transport-https -y
+echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
+sudo apt-get update -y
+# sudo apt-get install logstash -y
+
 
 
 ## finding the consul_prometheus_server private ip
