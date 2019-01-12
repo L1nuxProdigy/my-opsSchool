@@ -311,6 +311,21 @@ resource "aws_instance" "logstash" {
 	}
 }
 
+resource "aws_instance" "elasticsearch" {
+	ami           = "ami-08182c55a1c188dee"
+	instance_type = "t2.micro"
+	key_name        = "${var.key_name}"
+	subnet_id = "${aws_subnet.Subnet_main.id}"
+	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
+	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
+
+	tags = {
+	Name = "Logstash_by_Terraform"
+	}
+	
+	user_data = "${file(var.elasticsearch_path)}"
+}
+
 ##################################################################################
 # OUTPUT
 ##################################################################################
