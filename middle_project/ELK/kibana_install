@@ -72,3 +72,6 @@ done
 ## kibana configuration
 echo 'elasticsearch.url: "http://'${x3}':9200"' >> /etc/kibana/kibana.yml
 
+systemctl enable kibana
+systemctl start kibana
+
