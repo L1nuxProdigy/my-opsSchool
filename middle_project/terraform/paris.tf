@@ -16,6 +16,7 @@ variable "user_data_dummy_exporter_path2" {}
 variable "prometheus_consul_server_path" {}
 variable "grafana_path" {}
 variable "logstash_path" {}
+variable "elasticsearch_path" {}
 
 
 

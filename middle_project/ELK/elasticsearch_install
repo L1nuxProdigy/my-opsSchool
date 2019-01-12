@@ -16,7 +16,7 @@ sudo mkdir /var/lib/consul /etc/consul.d
 LOCAL_IPV4=$(curl "http://169.254.169.254/latest/meta-data/local-ipv4")
 
 cat << EOCCF >/etc/consul.d/agent.hcl
-node_name = "logstash"
+node_name = "elasticsearch"
 client_addr =  "0.0.0.0"
 recursors =  ["127.0.0.1"]
 bootstrap =  false
@@ -47,18 +47,12 @@ EOCSU
 systemctl daemon-reload
 systemctl start consul &
 
-## logstash prerequisites- JAVA
+## elasticsearch prerequisites- JAVA
 sudo add-apt-repository ppa:openjdk-r/ppa -y
 sudo apt-get update -y
 sudo apt-get install openjdk-8-jdk-headless -y
-#sudo java -Xms256m -Xmx512m
 
-## logstash install
-wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-sudo apt-get install apt-transport-https -y
-echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
-sudo apt-get update -y
-# sudo apt-get install logstash -y
+## elasticsearch install
 
 
 # setting an interactive shell variable named x3 as a local ip for a consul node
