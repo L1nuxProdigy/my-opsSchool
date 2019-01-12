@@ -17,6 +17,7 @@ variable "prometheus_consul_server_path" {}
 variable "grafana_path" {}
 variable "logstash_path" {}
 variable "elasticsearch_path" {}
+variable "kibana_path" {}
 
 
 
@@ -324,6 +325,21 @@ resource "aws_instance" "elasticsearch" {
 	}
 	
 	user_data = "${file(var.elasticsearch_path)}"
+}
+
+resource "aws_instance" "kibana" {
+	ami           = "ami-08182c55a1c188dee"
+	instance_type = "t2.micro"
+	key_name        = "${var.key_name}"
+	subnet_id = "${aws_subnet.Subnet_main.id}"
+	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
+	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
+
+	tags = {
+	Name = "Kibana_by_Terraform"
+	}
+	
+	user_data = "${file(var.kibana_path)}"
 }
 
 ##################################################################################
