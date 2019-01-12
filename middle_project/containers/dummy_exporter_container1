@@ -78,3 +78,15 @@ sudo echo '{"service": {"name": "dummy_exporter", "tags": ["dummy"], "port": 654
 curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.5.4-amd64.deb
 dpkg -i filebeat-6.5.4-amd64.deb
 
+echo 'filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /tmp/*.log
+
+output.elasticsearch:
+  hosts: ["'${x3}':9200"]' > /etc/filebeat/filebeat.yml
+
+sudo systemctl enable filebeat.service
+sudo systemctl start filebeat.service
+
