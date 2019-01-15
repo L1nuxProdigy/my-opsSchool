@@ -31,15 +31,11 @@ provider "aws" {
 ##################################################################################
 
 resource "aws_instance" "percona" {
-	ami           = "ami-c86c3f23"
+	ami           = "ami-0bdf93799014acdc4"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
-	vpc_security_group_ids = ["sg-02e7cd2c6090514d4"]
+	vpc_security_group_ids = ["sg-02e7cd2c6090514d"]
 
-	connection {
-		user        = "ec2-user"
-		private_key = "${file(var.private_key_path)}"
-	}
 	
 	tags = {
 	Name = "Percona_by_Terraform"
