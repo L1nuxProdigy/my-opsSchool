@@ -45,6 +45,6 @@ resource "aws_instance" "percona" {
 	Name = "Percona_by_Terraform"
     }
 	
-	user_data = 
+	user_data = "${file(var.percona_script_path)}"
 	
 }
