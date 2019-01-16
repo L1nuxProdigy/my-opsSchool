@@ -10,4 +10,9 @@ sudo dpkg -i percona-release_latest.$(lsb_release -sc)_all.deb
 apt update -y
 
 sudo apt-get install percona-server-server-5.7 -y
+cd /home/ubuntu
+git clone https://github.com/L1nuxProdigy/my-opsSchool
+service mysql start
+mysql <  /home/ubuntu/my-opsSchool/percona/mysqlsampledatabase.sql
+
 
