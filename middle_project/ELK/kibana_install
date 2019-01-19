@@ -80,5 +80,6 @@ cd /home/ubuntu
 git clone https://github.com/L1nuxProdigy/my-opsSchool
 
 ## creating filebeat index-patternt
-curl -X POST 'http://'${LOCAL_IPV4}':5601/api/saved_objects/index-pattern/' -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d @/home/ubuntu/my-opsSchool/middle_project/ELK/json/curl_kibana_index-pattern
+cd /home/ubuntu/my-opsSchool/middle_project/ELK/json
+./kibana_script_for_all_curls
 
