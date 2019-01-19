@@ -1,5 +1,5 @@
 ## without file
-curl -X POST "http://35.180.30.222:5601/api/kibana/dashboards/import" -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
+curl -X POST 'http://'${LOCAL_IPV4}':5601/api/kibana/dashboards/import' -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
 {
   "objects": [
   {
