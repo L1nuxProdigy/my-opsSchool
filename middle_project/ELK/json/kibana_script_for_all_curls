@@ -1,3 +1,4 @@
+## creating an index pattern
 curl -X POST 'http://'${LOCAL_IPV4}':5601/api/saved_objects/index-pattern/' -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
   {
     "attributes": {
@@ -10,6 +11,7 @@ curl -X POST 'http://'${LOCAL_IPV4}':5601/api/saved_objects/index-pattern/' -H '
 
 index_pattern_id_variable=$(cat index_pattern_id_file | cut -d '"' -f8)
 
+## creating a visualization
 curl -X POST 'http://'${LOCAL_IPV4}':5601/api/saved_objects/visualization/' -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
   {
     "attributes": {
@@ -27,6 +29,7 @@ curl -X POST 'http://'${LOCAL_IPV4}':5601/api/saved_objects/visualization/' -H '
 
 visualization_id_variable=$(cat visualization_id_file | cut -d '"' -f8)
 
+## creating a dashboard
 curl -X POST 'http://'${LOCAL_IPV4}':5601/api/kibana/dashboards/import' -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
 {
   "objects": [
