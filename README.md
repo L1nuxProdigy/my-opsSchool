@@ -10,3 +10,6 @@ Hello dear instructor/ tester/ father of four, please pay attention to the follo
 4. run the command: terraform init
 5. run the command: terraform apply -var-file='variables'
 6. have fun :]
+
+
+* grafana intial username and password are admin admin
