@@ -40,7 +40,7 @@ sudo mkdir /var/lib/consul /etc/consul.d
 LOCAL_IPV4=$(curl "http://169.254.169.254/latest/meta-data/local-ipv4")
 
 cat << EOCCF >/etc/consul.d/agent.hcl
-node_name = "app1"
+node_name = "app2"
 client_addr =  "0.0.0.0"
 recursors =  ["127.0.0.1"]
 bootstrap =  false
@@ -75,8 +75,8 @@ systemctl start consul &
 sudo echo '{"service": {"name": "dummy_exporter", "tags": ["dummy"], "port": 65433}}' > /etc/consul.d/dummy_exporter.json
 
 # install file-beat
-curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.5.4-amd64.deb
-dpkg -i filebeat-6.5.4-amd64.deb
+sudo curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.5.4-amd64.deb
+sudo dpkg -i filebeat-6.5.4-amd64.deb
 
 # setting an interactive shell variable named x3 as a local ip for a consul node
 x=$(dig @127.0.0.1 -p 8600 elasticsearch.node.consul +noall +answer | tail -n1)
@@ -86,7 +86,7 @@ x3=$(echo $x2 | cut -d ' ' -f5)
 ## finding the elastic_search private ip
 while [[ ${#x3} = 0 ]]; do
         sleep 15
-		x=$(dig @127.0.0.1 -p 8600 elasticsearch.node.consul +noall +answer | tail -n1)
+		x=$(dig @127.0.0.1 -p 8600 nonode.node.consul +noall +answer | tail -n1)
 		x2=${x# }
 		x3=$(echo $x2 | cut -d ' ' -f5)
 done
@@ -99,7 +99,6 @@ echo 'filebeat.inputs:
 
 output.elasticsearch:
   hosts: ["'${x3}':9200"]' > /etc/filebeat/filebeat.yml
-
+  
 sudo systemctl enable filebeat.service
 sudo systemctl start filebeat.service
-

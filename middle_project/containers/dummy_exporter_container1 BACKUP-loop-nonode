@@ -86,7 +86,7 @@ x3=$(echo $x2 | cut -d ' ' -f5)
 ## finding the elastic_search private ip
 while [[ ${#x3} = 0 ]]; do
         sleep 15
-		x=$(dig @127.0.0.1 -p 8600 elasticsearch.node.consul +noall +answer | tail -n1)
+		x=$(dig @127.0.0.1 -p 8600 nonode.node.consul +noall +answer | tail -n1)
 		x2=${x# }
 		x3=$(echo $x2 | cut -d ' ' -f5)
 done
