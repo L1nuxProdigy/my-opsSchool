@@ -71,6 +71,34 @@ datasources:
     url: http://${x3}:9090
 " > /etc/grafana/provisioning/datasources/prometheus.yml
 
+# adding the dashboard configuration
+echo "apiVersion: 1
+
+providers:
+- name: 'Prometheus'
+  orgId: 1
+  folder: ''
+  type: file
+  disableDeletion: false
+  editable: true
+  options:
+    path: /etc/grafana/provisioning/dashboards/dashboard.json
+" > /etc/grafana/provisioning/dashboards/all.yml
+
+# cloning the repo from git
+cd /home/ubuntu
+git clone https://github.com/L1nuxProdigy/my-opsSchool
+
+# adding the dashboard json
+cp /home/ubuntu/my-opsSchool/middle_project/grafana/json/dashboard.json /etc/grafana/provisioning/dashboards/dashboard.json
+
 # starting the grafana service
 sudo systemctl daemon-reload
 sudo systemctl start grafana-server
+
+## checking if grafana is up- wonky way
+#lines_in_page=$(curl 'http://'${LOCAL_IPV4}':3000' | wc -l)
+#while [[ $lines_in_page = 0 ]]; do
+	#sleep 15
+	#lines_in_page=$(curl 'http://'${LOCAL_IPV4}':3000' | wc -l)
+done
