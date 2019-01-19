@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Downloading and installing Prerequisites
+sudo apt-get update -y
+sudo apt install unzip -y
+sudo wget https://releases.hashicorp.com/consul/1.4.0/consul_1.4.0_linux_amd64.zip
+
+# Unzipping and moving the binary to path
+sudo unzip consul_1.4.0_linux_amd64.zip
+sudo mv ./consul /usr/local/bin/consul
+sudo chown ubuntu /usr/local/bin/consul
+
+
+## consul server command
+sudo mkdir /var/lib/consul /etc/consul.d
+sudo nohup consul agent -server -bootstrap-expect 1 -data-dir /var/lib/consul -config-dir /etc/consul.d -node="consul-server"
+

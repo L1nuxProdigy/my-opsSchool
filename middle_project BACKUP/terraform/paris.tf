@@ -3,11 +3,11 @@
 ##################################################################################
 
 ### Connection Vars ###
-variable "aws_access_key" {
-    default = "<your_aws_access_key>"
-}
-variable "aws_secret_key" {
-    default = "<your_aws_secret_key>"
+variable "aws_access_key" {}
+variable "aws_secret_key" {}
+variable "private_key_path" {}
+variable "key_name" {
+  default = "paris"
 }
 
 ### Machines Configurations Scripts ###
@@ -29,7 +29,7 @@ variable "kibana_path" {}
 provider "aws" {
   access_key = "${var.aws_access_key}"
   secret_key = "${var.aws_secret_key}"
-  region     = "us-east-1"
+  region     = "eu-west-3"
 }
 
 ##################################################################################
@@ -221,7 +221,7 @@ resource "aws_security_group" "SecurityGroup_main" {
 ##################################################################################
 
 resource "aws_instance" "App_with_Consul_client-1" {
-	ami           = "ami-0ac019f4fcb7cb7e6"
+	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
@@ -236,12 +236,17 @@ resource "aws_instance" "App_with_Consul_client-1" {
 }
 
 resource "aws_instance" "App_with_Consul_client-2" {
-	ami           = "ami-0ac019f4fcb7cb7e6"
+	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
 	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
+
+	connection {
+		user        = "ubuntu"
+		private_key = "${file(var.private_key_path)}"
+	}
 	
 	tags = {
 	Name = "APP2_by_Terraform"
@@ -251,11 +256,16 @@ resource "aws_instance" "App_with_Consul_client-2" {
 }
 
 resource "aws_instance" "prometheus_consul_server" {
-	ami           = "ami-0ac019f4fcb7cb7e6"
+	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
+
+	connection {
+		user        = "ubuntu"
+		private_key = "${file(var.private_key_path)}"
+	}
 	
 	tags = {
 	Name = "Consul_Prometheus_by_Terraform"
@@ -269,12 +279,17 @@ resource "aws_instance" "prometheus_consul_server" {
 }
 
 resource "aws_instance" "grafana" {
-	ami           = "ami-0ac019f4fcb7cb7e6"
+	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
 	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
+
+	connection {
+		user        = "ubuntu"
+		private_key = "${file(var.private_key_path)}"
+	}
 	
 	tags = {
 	Name = "Grafana_by_Terraform"
@@ -288,12 +303,17 @@ resource "aws_instance" "grafana" {
 }
 
 resource "aws_instance" "logstash" {
-	ami           = "ami-0ac019f4fcb7cb7e6"
+	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
 	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
+
+	connection {
+		user        = "ubuntu"
+		private_key = "${file(var.private_key_path)}"
+	}
 	
 	tags = {
 	Name = "Logstash_by_Terraform"
@@ -307,7 +327,7 @@ resource "aws_instance" "logstash" {
 }
 
 resource "aws_instance" "elasticsearch" {
-	ami           = "ami-0ac019f4fcb7cb7e6"
+	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
@@ -322,7 +342,7 @@ resource "aws_instance" "elasticsearch" {
 }
 
 resource "aws_instance" "kibana" {
-	ami           = "ami-0ac019f4fcb7cb7e6"
+	ami           = "ami-08182c55a1c188dee"
 	instance_type = "t2.micro"
 	key_name        = "${var.key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
