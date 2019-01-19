@@ -9,6 +9,9 @@ variable "aws_access_key" {
 variable "aws_secret_key" {
     default = "<your_aws_secret_key>"
 }
+variable "aws_key_name" {
+    default = "<your_aws_key_name>"
+}
 
 ### Machines Configurations Scripts ###
 variable "user_data_dummy_exporter_path1" {}
@@ -223,7 +226,7 @@ resource "aws_security_group" "SecurityGroup_main" {
 resource "aws_instance" "App_with_Consul_client-1" {
 	ami           = "ami-0ac019f4fcb7cb7e6"
 	instance_type = "t2.micro"
-	key_name        = "${var.key_name}"
+	key_name        = "${var.aws_key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
 	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
@@ -238,7 +241,7 @@ resource "aws_instance" "App_with_Consul_client-1" {
 resource "aws_instance" "App_with_Consul_client-2" {
 	ami           = "ami-0ac019f4fcb7cb7e6"
 	instance_type = "t2.micro"
-	key_name        = "${var.key_name}"
+	key_name        = "${var.aws_key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
 	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
@@ -253,7 +256,7 @@ resource "aws_instance" "App_with_Consul_client-2" {
 resource "aws_instance" "prometheus_consul_server" {
 	ami           = "ami-0ac019f4fcb7cb7e6"
 	instance_type = "t2.micro"
-	key_name        = "${var.key_name}"
+	key_name        = "${var.aws_key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
 	
@@ -271,7 +274,7 @@ resource "aws_instance" "prometheus_consul_server" {
 resource "aws_instance" "grafana" {
 	ami           = "ami-0ac019f4fcb7cb7e6"
 	instance_type = "t2.micro"
-	key_name        = "${var.key_name}"
+	key_name        = "${var.aws_key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
 	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
@@ -290,7 +293,7 @@ resource "aws_instance" "grafana" {
 resource "aws_instance" "logstash" {
 	ami           = "ami-0ac019f4fcb7cb7e6"
 	instance_type = "t2.micro"
-	key_name        = "${var.key_name}"
+	key_name        = "${var.aws_key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
 	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
@@ -309,7 +312,7 @@ resource "aws_instance" "logstash" {
 resource "aws_instance" "elasticsearch" {
 	ami           = "ami-0ac019f4fcb7cb7e6"
 	instance_type = "t2.micro"
-	key_name        = "${var.key_name}"
+	key_name        = "${var.aws_key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
 	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
@@ -324,7 +327,7 @@ resource "aws_instance" "elasticsearch" {
 resource "aws_instance" "kibana" {
 	ami           = "ami-0ac019f4fcb7cb7e6"
 	instance_type = "t2.micro"
-	key_name        = "${var.key_name}"
+	key_name        = "${var.aws_key_name}"
 	subnet_id = "${aws_subnet.Subnet_main.id}"
 	vpc_security_group_ids = ["${aws_security_group.SecurityGroup_main.id}"]
 	iam_instance_profile = "${aws_iam_instance_profile.Consul_IAM_Profile.name}"
