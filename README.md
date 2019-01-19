@@ -7,5 +7,6 @@ Hello dear instructor/ tester/ father of four, please pay attention to the follo
       - variable "aws_access_key"
       - variable "aws_secret_key"
       - variable "aws_key_name"
-4. run the command: terraform apply -var-file='variables'
-5. have fun :]
+4. run the command: terraform init
+5. run the command: terraform apply -var-file='variables'
+6. have fun :]
