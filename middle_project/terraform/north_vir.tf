@@ -266,9 +266,6 @@ resource "aws_instance" "prometheus_consul_server" {
 	
 	user_data = "${file(var.prometheus_consul_server_path)}"
 	
-	provisioner "remote-exec" {
-		inline = []
-	}
 }
 
 resource "aws_instance" "grafana" {
@@ -284,10 +281,7 @@ resource "aws_instance" "grafana" {
 	}
 	
 	user_data = "${file(var.grafana_path)}"
-	
-	provisioner "remote-exec" {
-		inline = []
-	}
+
 }
 
 resource "aws_instance" "logstash" {
@@ -304,9 +298,6 @@ resource "aws_instance" "logstash" {
 	
 	user_data = "${file(var.logstash_path)}"
 	
-	provisioner "remote-exec" {
-		inline = []
-	}
 }
 
 resource "aws_instance" "elasticsearch" {
