@@ -79,6 +79,12 @@ systemctl start kibana
 cd /home/ubuntu
 git clone https://github.com/L1nuxProdigy/my-opsSchool
 
+## checking if kibana is up- wonky way
+lines_in_page=$(curl 'http://'${LOCAL_IPV4}':5601/app/kibana#/management/kibana/objects?_g=()' | wc -l)
+while [[ $lines_in_page = 0 ]]; do
+	sleep 15
+	lines_in_page=$(curl 'http://'${LOCAL_IPV4}':5601/app/kibana#/management/kibana/objects?_g=()' | wc -l)
+done
 ## creating filebeat index-patternt
 cd /home/ubuntu/my-opsSchool/middle_project/ELK/json
 ./kibana_script_for_all_curls
