@@ -1,5 +1,7 @@
 #!/bin/bash
 
+LOCAL_IPV4=$(curl "http://169.254.169.254/latest/meta-data/local-ipv4")
+
 ## creating an index pattern
 curl -X POST 'http://'${LOCAL_IPV4}':5601/api/saved_objects/index-pattern/' -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d'
   {
