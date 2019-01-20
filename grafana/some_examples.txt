@@ -1,0 +1,7 @@
+we do rate on rising couinter
+
+label_replace(DummyService_duration_summary{quantile=~"0.9*"}, "hostname", "$1", "instance", "(.*):[0-9]*")
+
+label_replace(DummyService_duration_summary, "hostname", "$1", "instance", "(.*):[0-9]*")
+
+label_replace(DummyService_duration_summary{quantile=~"0.9*",instance=~"$Instance.*"}, "hostname", "$1", "instance", "(.*):[0-9]*")
