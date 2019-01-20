@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1548012066185,
+  "id": 2,
+  "iteration": 1548009240429,
   "links": [],
   "panels": [
     {
@@ -198,8 +199,9 @@
       {
         "allValue": ".*",
         "current": {
-          "text": "All",
-          "value": "$__all"
+          "tags": [],
+          "text": "10.0.1.91",
+          "value": "10.0.1.91"
         },
         "datasource": "Prometheus",
         "definition": "label_values(DummyService_duration_summary,instance)",
@@ -213,10 +215,20 @@
             "selected": true,
             "text": "All",
             "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "10.0.1.240",
+            "value": "10.0.1.240"
+          },
+          {
+            "selected": false,
+            "text": "10.0.1.91",
+            "value": "10.0.1.91"
           }
         ],
         "query": "label_values(DummyService_duration_summary,instance)",
-        "refresh": 0,
+        "refresh": 1,
         "regex": "/(.*):[0-9]*/",
         "skipUrlSync": false,
         "sort": 0,
@@ -260,5 +272,5 @@
   "timezone": "",
   "title": "Dummy Dash",
   "uid": null,
-  "version": 1
+  "version": 13
 }
