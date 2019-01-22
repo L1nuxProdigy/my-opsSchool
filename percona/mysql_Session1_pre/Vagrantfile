@@ -5,7 +5,7 @@ servers=[
   :box => "ubuntu/trusty64",
   :ram => 1024,
   :cpu => 1,
-  :provisions => ["download-percona.sh"]
+  :provisions => ["install-percona.sh"]
 }
 ]
 Vagrant.configure(2) do |config|
