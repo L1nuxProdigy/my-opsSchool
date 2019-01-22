@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ha_proxy script location
+# MySQL Percona
 echo 'percona_script_path = "/home/ubuntu/my-opsSchool/percona/terraform/scripts/percona_install"' >> /home/ubuntu/my-opsSchool/percona/terraform/variables
 
 
