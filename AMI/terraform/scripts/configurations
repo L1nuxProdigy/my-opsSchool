@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd /mnt
+dd if=/dev/zero of=ami-disk.img count=1024 bs=1M
+mkfs -t ext3 -L rootfs -F ami-disk.img
+mkdir image_root
+mount -o loop ami-disk.img image_root
+
+apt update -y
+apt install debootstrap -y
+debootstrap --arch amd64 stretch ./image_root
